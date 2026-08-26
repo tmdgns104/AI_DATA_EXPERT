@@ -1,9 +1,12 @@
 {
   "version": "AI_DATA_EXPERT_CODEX_SKILL_V4",
-  "status": "FROZEN_AFTER_TARGETED_SEALED_SIMULATION",
+  "core_status": "FROZEN_AFTER_TARGETED_SEALED_SIMULATION",
+  "distribution_status": "CLONE_READY_SETUP_AND_RUNTIME_SMOKE_VERIFIED",
   "development": {
     "v4_improvement_tests": "8/8 PASS",
-    "inherited_v3_regression_tests": "22/22 PASS"
+    "inherited_v3_regression_tests": "22/22 PASS",
+    "isolated_v4_notebook_e2e_rerun": "PASS",
+    "install_runtime_smoke": "PASS"
   },
   "sealed": {
     "score_pct": 100.0,
@@ -11,6 +14,15 @@
     "failed": [],
     "freeze_integrity": true,
     "note": "Targeted regression/generalization suite; not real-world accuracy."
+  },
+  "distribution": {
+    "windows_entrypoint": "setup_windows.bat",
+    "post_install_verifier": "verify_install.py",
+    "demo_data_generation": "examples/generate_demo_data.py",
+    "direct_demo": "run_demo_without_codex.bat",
+    "codex_skill": ".agents/skills/ai-data-expert/SKILL.md",
+    "python_minimum": "3.11",
+    "required_dependencies_complete_for_current_tabular_dl_vision_workflows": true
   },
   "rag": {
     "architecture": "BM25 + vector similarity + metadata boost + structured facts + expert context injection",
