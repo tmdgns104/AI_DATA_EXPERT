@@ -1,0 +1,39 @@
+{
+  "version": "AI_DATA_EXPERT_CODEX_SKILL_V4",
+  "score_pct": 100.0,
+  "passed_weight": 96,
+  "total_weight": 96,
+  "failed": [],
+  "summary": {
+    "S01": "partial-label classification + ID exclusion + derived run split PASS",
+    "S02": "repeated equipment group split PASS",
+    "S03": "chronological split PASS",
+    "S04": "Hybrid RAG prediction-time and unavailable-feature fact injection PASS_WITH_REVIEW",
+    "S05": "cross-target Domain RAG pollution guard PASS_WITH_REVIEW",
+    "S06": "no-train Vision negation PASS",
+    "S07": "actual 3-class pixel CNN PASS",
+    "S08": "Notebook execution + semantic contract PASS",
+    "S09": "custom operational cost/group/prediction-time RAG facts PASS",
+    "S10": "Windows UTF-8 and fail-fast setup contract PASS",
+    "S11": "expert failure isolation and partial evidence preservation PASS"
+  },
+  "representative_evidence": {
+    "target_missing_separated": 31,
+    "unique_id_excluded": ["_id"],
+    "derived_run_groups": 12,
+    "group_overlap_zero": true,
+    "rag_backend": "char-tfidf-vector-fallback",
+    "domain_prediction_time": "before process completion",
+    "post_outcome_features_excluded": ["power_consumption", "processing_time_sec"],
+    "pixel_cnn_accuracy": 1.0,
+    "pixel_cnn_macro_f1": 1.0,
+    "semantic_notebook_validator": "PASS",
+    "expert_failure_recorded": true
+  },
+  "rag_environment": {
+    "sentence_transformers": false,
+    "faiss": false,
+    "note": "The targeted sealed runtime used hybrid BM25 + char-TFIDF vector fallback. The optional sentence-transformers+FAISS path is packaged but was not installed in this sandbox."
+  },
+  "interpretation": "96/96 is targeted regression/generalization evidence for the V4 repair scope. It is not independent real-world accuracy."
+}
