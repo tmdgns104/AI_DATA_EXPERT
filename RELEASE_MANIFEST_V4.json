@@ -1,0 +1,62 @@
+{
+  "release": "AI_DATA_EXPERT_V4_CLONE_READY",
+  "date": "2026-08-26",
+  "purpose": "GitHub clone/ZIP -> setup_windows.bat -> immediate V4 Expert usage without copying missing project files",
+  "core_baseline": "CORE_FREEZE_V4.json",
+  "required_paths": [
+    "AGENTS.md",
+    ".agents/skills/ai-data-expert/SKILL.md",
+    ".agents/skills/ai-data-expert/scripts/run_expert.py",
+    ".agents/skills/ai-data-expert/scripts/solve_notebook.py",
+    ".agents/skills/ai-data-expert/scripts/validate_notebook.py",
+    "data_expert/enhanced_system.py",
+    "data_expert/v4_system.py",
+    "data_expert/reasoning_system.py",
+    "data_expert/enhanced_system_v2.py",
+    "data_expert/task_spec_v4.py",
+    "data_expert/data_guard_v4.py",
+    "data_expert/domain_rag_v4.py",
+    "data_expert/advanced_ml_v4.py",
+    "data_expert/dl_engine_v4.py",
+    "data_expert/hypothesis_engine_v4.py",
+    "data_expert/challenger_v4.py",
+    "data_expert/tacit_knowledge/HEURISTICS.json",
+    "data_expert/tacit_knowledge/SOURCES.json",
+    "data_expert/PARENT_TACIT_V2_FREEZE.json",
+    "domain_knowledge/README.md",
+    "domain_knowledge/manufacturing_constraints.json",
+    "requirements.txt",
+    "setup_windows.bat",
+    "verify_install.py",
+    "examples/generate_demo_data.py",
+    "examples/DNN_regression_question.ipynb",
+    "tests/test_v4_improvements.py",
+    "tests/test_skill_package.py",
+    "docs/INSTALL_KO.md"
+  ],
+  "install_contract": [
+    "create/reuse .venv",
+    "require Python >= 3.11",
+    "install complete base dependencies",
+    "generate deterministic bundled demo data",
+    "import V4 runtime",
+    "execute a small classification task",
+    "confirm machine-learning routing",
+    "confirm Runtime Verifier is not FAIL",
+    "return non-zero on any failed setup step"
+  ],
+  "verification_evidence": {
+    "verify_install": "PASS",
+    "install_smoke_route": ["data-analyst", "machine-learning"],
+    "install_smoke_verifier": "PASS",
+    "v4_improvement_tests": "8/8 PASS",
+    "v4_notebook_e2e_isolated_rerun": "PASS",
+    "targeted_sealed": "96/96 PASS"
+  },
+  "not_claimed": [
+    "Embedding+FAISS retrieval quality is not yet runtime-benchmarked in this environment.",
+    "V4 is not an autonomous production approval system.",
+    "Targeted sealed 96/96 is not universal real-world accuracy."
+  ],
+  "next_feature_work": "V5 only; do not rewrite the V4 frozen analysis core in place."
+}
