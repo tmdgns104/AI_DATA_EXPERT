@@ -10,12 +10,29 @@ set JUPYTER_DATA_DIR=%CD%\.jupyter-data
 set JUPYTER_RUNTIME_DIR=%CD%\.jupyter-runtime
 set IPYTHONDIR=%CD%\.ipython
 
+where python >nul 2>&1
+if errorlevel 1 (
+  where py >nul 2>&1
+  if errorlevel 1 (
+    echo Python 3 was not found in PATH.
+    goto :fail
+  )
+  set "BOOTSTRAP_PY=py -3"
+) else (
+  set "BOOTSTRAP_PY=python"
+)
+
 if not exist ".venv\Scripts\python.exe" (
-  python -m venv .venv
+  %BOOTSTRAP_PY% -m venv .venv
   if errorlevel 1 goto :fail
 )
 call .venv\Scripts\activate.bat
 if errorlevel 1 goto :fail
+python -c "import sys; raise SystemExit(0 if sys.version_info >= (3, 11) else 1)"
+if errorlevel 1 (
+  echo Python 3.11 or newer is required.
+  goto :fail
+)
 python -m pip install --upgrade pip
 if errorlevel 1 goto :fail
 python -m pip install -r requirements.txt
