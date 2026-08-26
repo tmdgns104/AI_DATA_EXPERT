@@ -1,0 +1,33 @@
+{
+  "version": "AI_DATA_EXPERT_CODEX_SKILL_V4",
+  "status": "FROZEN_AFTER_TARGETED_SEALED_SIMULATION",
+  "development": {
+    "v4_improvement_tests": "8/8 PASS",
+    "inherited_v3_regression_tests": "22/22 PASS"
+  },
+  "sealed": {
+    "score_pct": 100.0,
+    "score": "96/96",
+    "failed": [],
+    "freeze_integrity": true,
+    "note": "Targeted regression/generalization suite; not real-world accuracy."
+  },
+  "rag": {
+    "architecture": "BM25 + vector similarity + metadata boost + structured facts + expert context injection",
+    "optional_semantic_backend": "sentence-transformers + FAISS",
+    "sandbox_verified_backend": "BM25 + char-TFIDF vector fallback",
+    "semantic_faiss_runtime_verified": false
+  },
+  "real_usage": {
+    "extreme_imbalance_dnn": "PASS_WITH_REVIEW",
+    "vision_3class_pixel_cnn": "PASS",
+    "vision_test_accuracy": 0.9444,
+    "vision_test_macro_f1": 0.9441
+  },
+  "known_gaps": [
+    "Embedding+FAISS runtime still needs a local installed-model verification.",
+    "Modality-specific semantic validators need further separation.",
+    "Experts need a shared evidence store to eliminate cross-expert state mismatch.",
+    "Group/run inference remains heuristic when production lineage is unavailable."
+  ]
+}
