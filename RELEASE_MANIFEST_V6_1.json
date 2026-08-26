@@ -1,0 +1,37 @@
+{
+  "release": "AI_DATA_EXPERT_V6_1_CANDIDATE",
+  "release_status": "CANDIDATE_NOT_PROMOTED",
+  "entrypoint": "data_expert/enhanced_system.py",
+  "primary_system": "data_expert/v6_1_system.py",
+  "codex_skill": ".agents/skills/ai-data-expert/SKILL.md",
+  "freeze": "V6_1_CORE_FREEZE.json",
+  "status": "FINAL_STATUS_V6_1.json",
+  "kpi": "KPI_V6_1.json",
+  "evaluation_report": "KAGGLE_MASTER_EVAL_V6_1_REPORT_KO.md",
+  "freeze_time_regression": "44/44 PASS",
+  "master_eval": "3835/4000 = 95.875",
+  "real_kaggle_data_coverage": "0/40",
+  "important_files": [
+    "data_expert/v6_1_system.py",
+    "data_expert/task_spec_v61.py",
+    "data_expert/challenger_v61.py",
+    "data_expert/modality_verifier_v61.py",
+    "data_expert/v6_system.py",
+    "data_expert/competition_spec_v6.py",
+    "data_expert/competition_planner_v6.py",
+    "data_expert/competition_verifier_v6.py",
+    "data_expert/output_renderer_v6.py",
+    "data_expert/v5_system.py",
+    "data_expert/shared_evidence_v5.py",
+    "data_expert/argument_ledger_v5.py",
+    "data_expert/time_series_dl_v5.py"
+  ],
+  "known_review_areas": [
+    "time+group composite validation",
+    "exact WRMSSE adapter",
+    "exact weighted pinball adapter",
+    "time-series baseline superiority",
+    "harder vision proxy",
+    "real Kaggle/MLE-bench execution"
+  ]
+}

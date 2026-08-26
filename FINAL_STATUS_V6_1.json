@@ -1,0 +1,38 @@
+{
+  "version": "V6.1_CANDIDATE",
+  "release_status": "CANDIDATE_NOT_PROMOTED",
+  "reason": "Core regression is clean, but Kaggle MASTER_EVAL still has 5 REVIEW cases and no real Kaggle data/leaderboard coverage.",
+  "tests_before_freeze": {
+    "inherited_v3": "22/22 PASS",
+    "v4": "8/8 PASS",
+    "v5": "7/7 PASS",
+    "v6": "5/5 PASS",
+    "v6_1": "2/2 PASS"
+  },
+  "master_eval": {
+    "strict_score": "3835/4000",
+    "kpi": 95.875,
+    "pass": 35,
+    "review": 5,
+    "fail": 0,
+    "critical_errors": {}
+  },
+  "real_data_coverage": "0/40",
+  "known_gaps": [
+    "validation strategy precedence can over-select group-aware split when time-aware structure should dominate or combine with grouping",
+    "M5 WRMSSE exact runtime not implemented in proxy evaluator",
+    "COVID Week 5 weighted pinball metric not fully reproduced in proxy evaluator",
+    "proxy time-series candidate model failed to beat persistence on 10/10 time-series scenarios",
+    "Vision proxy suite is too easy to support a real-world 100% claim",
+    "actual Kaggle data/leaderboard evaluation requires Kaggle API credentials or supplied datasets",
+    "40-competition catalog needs per-competition source audit before being treated as an authoritative external benchmark specification"
+  ],
+  "next_version_priorities": [
+    "composite time+group validation planner",
+    "exact competition metric adapters",
+    "rolling-origin multi-seed time-series modeling and stronger seasonal baselines",
+    "real-data MLE-bench/Kaggle execution",
+    "harder vision adversarial proxy and group/source shift tests",
+    "promote Human-friendly Renderer into the active Codex Skill contract after next freeze"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "version": "V6.1_CANDIDATE",
+  "strict_composite_kpi": 95.875,
+  "strict_score": "3835/4000",
+  "reasoning_contract_kpi_without_baseline_superiority_penalty": 98.375,
+  "proxy_model_improvement_rate_pct": 75.0,
+  "proxy_model_improved": "30/40",
+  "status_counts": {"PASS": 35, "REVIEW": 5, "FAIL": 0},
+  "components": {
+    "problem_understanding": {"earned": 400, "max": 400, "pct": 100.0},
+    "data_leakage_guard": {"earned": 600, "max": 600, "pct": 100.0},
+    "correct_validation": {"earned": 555, "max": 600, "pct": 92.5},
+    "metric_understanding": {"earned": 380, "max": 400, "pct": 95.0},
+    "baseline": {"earned": 400, "max": 400, "pct": 100.0},
+    "modeling": {"earned": 300, "max": 400, "pct": 75.0},
+    "failure_analysis": {"earned": 400, "max": 400, "pct": 100.0},
+    "verifier_challenger": {"earned": 400, "max": 400, "pct": 100.0},
+    "submission": {"earned": 200, "max": 200, "pct": 100.0},
+    "human_output": {"earned": 200, "max": 200, "pct": 100.0}
+  },
+  "critical_errors": {},
+  "real_kaggle_data_coverage_pct": 0.0,
+  "freeze_integrity": true,
+  "review_cases": [
+    {"slug":"bike-sharing-demand","score":85,"failed_components":["correct_validation"],"inferred_validation":"group-aware","metric_runtime":"EXACT_PROXY","model_better":true},
+    {"slug":"spaceship-titanic","score":85,"failed_components":["correct_validation"],"inferred_validation":"group-aware","metric_runtime":"EXACT_PROXY","model_better":true},
+    {"slug":"ieee-fraud-detection","score":85,"failed_components":["correct_validation"],"inferred_validation":"group-aware","metric_runtime":"EXACT_PROXY","model_better":true},
+    {"slug":"m5-forecasting-accuracy","score":80,"failed_components":["metric_understanding","modeling"],"inferred_validation":"rolling-origin","metric_runtime":"SPEC_KNOWN_RUNTIME_APPROX","model_better":false},
+    {"slug":"covid19-global-forecasting-week-5","score":80,"failed_components":["metric_understanding","modeling"],"inferred_validation":"chronological","metric_runtime":"SPEC_KNOWN_RUNTIME_APPROX","model_better":false}
+  ]
+}

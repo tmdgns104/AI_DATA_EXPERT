@@ -1,10 +1,12 @@
-# AI DATA EXPERT V4
+# AI DATA EXPERT V6.1 Candidate
 
-최신 설명은 루트의 [`README.md`](README.md)를 기준으로 합니다.
+한국어 기본 설명은 루트의 [`README.md`](README.md)를 기준으로 합니다.
 
-- 현재 기준: V4 Frozen
+- 최신 기준: **V6.1 Candidate**
+- Freeze-time regression: **44/44 PASS**
+- Kaggle MASTER_EVAL V1 proxy: **95.875**
+- 실제 Kaggle 원본 데이터 coverage: **0/40**
 - Codex Repository Skill: `.agents/skills/ai-data-expert/SKILL.md`
 - 사용법: `docs/USAGE_KO.md`
-- 연구일지: `docs/RESEARCH_LOG_KO.md`
-- 개발기록: `docs/DEVELOPMENT_LOG_KO.md`
-- 실사용 검증: `docs/REAL_VALIDATION_KO.md`
+- 아키텍처: `docs/ARCHITECTURE_KO.md`
+- V6.1 평가: `KAGGLE_MASTER_EVAL_V6_1_REPORT_KO.md`

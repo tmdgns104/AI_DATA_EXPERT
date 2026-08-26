@@ -1,0 +1,731 @@
+[
+  {
+    "category": "regression",
+    "slug": "house-prices-advanced-regression-techniques",
+    "name": "House Prices - Advanced Regression Techniques",
+    "metric": "log_rmse",
+    "direction": "min",
+    "target": "SalePrice",
+    "validation": "kfold",
+    "submission_columns": [
+      "SalePrice"
+    ],
+    "risk_flags": [
+      "skewed_target",
+      "mixed_types",
+      "missing",
+      "id_proxy"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques"
+  },
+  {
+    "category": "regression",
+    "slug": "bike-sharing-demand",
+    "name": "Bike Sharing Demand",
+    "metric": "rmsle",
+    "direction": "min",
+    "target": "count",
+    "validation": "time-aware",
+    "submission_columns": [
+      "count"
+    ],
+    "risk_flags": [
+      "time_order",
+      "count_target",
+      "leakage_components"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/bike-sharing-demand"
+  },
+  {
+    "category": "regression",
+    "slug": "allstate-claims-severity",
+    "name": "Allstate Claims Severity",
+    "metric": "mae",
+    "direction": "min",
+    "target": "loss",
+    "validation": "kfold",
+    "submission_columns": [
+      "loss"
+    ],
+    "risk_flags": [
+      "mixed_types",
+      "heavy_tail"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/allstate-claims-severity"
+  },
+  {
+    "category": "regression",
+    "slug": "mercedes-benz-greener-manufacturing",
+    "name": "Mercedes-Benz Greener Manufacturing",
+    "metric": "r2",
+    "direction": "max",
+    "target": "y",
+    "validation": "kfold",
+    "submission_columns": [
+      "y"
+    ],
+    "risk_flags": [
+      "high_cardinality",
+      "constant_columns"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/mercedes-benz-greener-manufacturing"
+  },
+  {
+    "category": "regression",
+    "slug": "restaurant-revenue-prediction",
+    "name": "Restaurant Revenue Prediction",
+    "metric": "rmse",
+    "direction": "min",
+    "target": "revenue",
+    "validation": "kfold",
+    "submission_columns": [
+      "Prediction"
+    ],
+    "risk_flags": [
+      "small_sample",
+      "mixed_types"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/restaurant-revenue-prediction"
+  },
+  {
+    "category": "regression",
+    "slug": "new-york-city-taxi-fare-prediction",
+    "name": "New York City Taxi Fare Prediction",
+    "metric": "rmse",
+    "direction": "min",
+    "target": "fare_amount",
+    "validation": "random",
+    "submission_columns": [
+      "fare_amount"
+    ],
+    "risk_flags": [
+      "geo_outliers",
+      "id_proxy"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/new-york-city-taxi-fare-prediction"
+  },
+  {
+    "category": "regression",
+    "slug": "nyc-taxi-trip-duration",
+    "name": "NYC Taxi Trip Duration",
+    "metric": "rmsle",
+    "direction": "min",
+    "target": "trip_duration",
+    "validation": "time-aware",
+    "submission_columns": [
+      "trip_duration"
+    ],
+    "risk_flags": [
+      "time_order",
+      "geo_outliers"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/nyc-taxi-trip-duration"
+  },
+  {
+    "category": "regression",
+    "slug": "sberbank-russian-housing-market",
+    "name": "Sberbank Russian Housing Market",
+    "metric": "rmsle",
+    "direction": "min",
+    "target": "price_doc",
+    "validation": "time-aware",
+    "submission_columns": [
+      "price_doc"
+    ],
+    "risk_flags": [
+      "time_order",
+      "missing",
+      "macro_features"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/sberbank-russian-housing-market"
+  },
+  {
+    "category": "regression",
+    "slug": "grupo-bimbo-inventory-demand",
+    "name": "Grupo Bimbo Inventory Demand",
+    "metric": "rmsle",
+    "direction": "min",
+    "target": "Demanda_uni_equil",
+    "validation": "group-aware",
+    "submission_columns": [
+      "Demanda_uni_equil"
+    ],
+    "risk_flags": [
+      "group_structure",
+      "count_target"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/grupo-bimbo-inventory-demand"
+  },
+  {
+    "category": "regression",
+    "slug": "champs-scalar-coupling",
+    "name": "CHAMPS Scalar Coupling",
+    "metric": "log_mae_by_type",
+    "direction": "min",
+    "target": "scalar_coupling_constant",
+    "validation": "group-aware",
+    "submission_columns": [
+      "scalar_coupling_constant"
+    ],
+    "risk_flags": [
+      "molecule_group",
+      "multiple_types"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/champs-scalar-coupling"
+  },
+  {
+    "category": "classification",
+    "slug": "titanic",
+    "name": "Titanic - Machine Learning from Disaster",
+    "metric": "accuracy",
+    "direction": "max",
+    "target": "Survived",
+    "validation": "stratified",
+    "submission_columns": [
+      "Survived"
+    ],
+    "risk_flags": [
+      "mixed_types",
+      "small_sample"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/titanic"
+  },
+  {
+    "category": "classification",
+    "slug": "spaceship-titanic",
+    "name": "Spaceship Titanic",
+    "metric": "accuracy",
+    "direction": "max",
+    "target": "Transported",
+    "validation": "stratified",
+    "submission_columns": [
+      "Transported"
+    ],
+    "risk_flags": [
+      "group_structure",
+      "missing"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/spaceship-titanic"
+  },
+  {
+    "category": "classification",
+    "slug": "santander-customer-transaction-prediction",
+    "name": "Santander Customer Transaction Prediction",
+    "metric": "roc_auc",
+    "direction": "max",
+    "target": "target",
+    "validation": "stratified",
+    "submission_columns": [
+      "target"
+    ],
+    "risk_flags": [
+      "imbalance",
+      "id_proxy"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/santander-customer-transaction-prediction"
+  },
+  {
+    "category": "classification",
+    "slug": "home-credit-default-risk",
+    "name": "Home Credit Default Risk",
+    "metric": "roc_auc",
+    "direction": "max",
+    "target": "TARGET",
+    "validation": "stratified",
+    "submission_columns": [
+      "TARGET"
+    ],
+    "risk_flags": [
+      "imbalance",
+      "entity_tables"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/home-credit-default-risk"
+  },
+  {
+    "category": "classification",
+    "slug": "ieee-fraud-detection",
+    "name": "IEEE-CIS Fraud Detection",
+    "metric": "roc_auc",
+    "direction": "max",
+    "target": "isFraud",
+    "validation": "time-aware",
+    "submission_columns": [
+      "isFraud"
+    ],
+    "risk_flags": [
+      "imbalance",
+      "time_order",
+      "entity_leakage"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/ieee-fraud-detection"
+  },
+  {
+    "category": "classification",
+    "slug": "otto-group-product-classification-challenge",
+    "name": "Otto Group Product Classification",
+    "metric": "log_loss",
+    "direction": "min",
+    "target": "target",
+    "validation": "stratified",
+    "submission_columns": [
+      "Class_1"
+    ],
+    "risk_flags": [
+      "multiclass"
+    ],
+    "classes": 9,
+    "source_url": "https://www.kaggle.com/competitions/otto-group-product-classification-challenge"
+  },
+  {
+    "category": "classification",
+    "slug": "forest-cover-type-prediction",
+    "name": "Forest Cover Type Prediction",
+    "metric": "accuracy",
+    "direction": "max",
+    "target": "Cover_Type",
+    "validation": "stratified",
+    "submission_columns": [
+      "Cover_Type"
+    ],
+    "risk_flags": [
+      "multiclass"
+    ],
+    "classes": 7,
+    "source_url": "https://www.kaggle.com/competitions/forest-cover-type-prediction"
+  },
+  {
+    "category": "classification",
+    "slug": "dont-overfit-ii",
+    "name": "Don’t Overfit! II",
+    "metric": "roc_auc",
+    "direction": "max",
+    "target": "target",
+    "validation": "stratified",
+    "submission_columns": [
+      "target"
+    ],
+    "risk_flags": [
+      "small_sample",
+      "many_features",
+      "overfit"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/dont-overfit-ii"
+  },
+  {
+    "category": "classification",
+    "slug": "cat-in-the-dat-ii",
+    "name": "Categorical Feature Encoding Challenge II",
+    "metric": "roc_auc",
+    "direction": "max",
+    "target": "target",
+    "validation": "stratified",
+    "submission_columns": [
+      "target"
+    ],
+    "risk_flags": [
+      "categorical",
+      "missing"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/cat-in-the-dat-ii"
+  },
+  {
+    "category": "classification",
+    "slug": "porto-seguro-safe-driver-prediction",
+    "name": "Porto Seguro’s Safe Driver Prediction",
+    "metric": "gini",
+    "direction": "max",
+    "target": "target",
+    "validation": "stratified",
+    "submission_columns": [
+      "target"
+    ],
+    "risk_flags": [
+      "imbalance",
+      "missing_codes"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/porto-seguro-safe-driver-prediction"
+  },
+  {
+    "category": "timeseries",
+    "slug": "store-sales-time-series-forecasting",
+    "name": "Store Sales - Time Series Forecasting",
+    "metric": "rmsle",
+    "direction": "min",
+    "target": "sales",
+    "validation": "chronological",
+    "submission_columns": [
+      "sales"
+    ],
+    "risk_flags": [
+      "panel_series",
+      "holidays",
+      "future_covariates"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/store-sales-time-series-forecasting"
+  },
+  {
+    "category": "timeseries",
+    "slug": "competitive-data-science-predict-future-sales",
+    "name": "Predict Future Sales",
+    "metric": "rmse",
+    "direction": "min",
+    "target": "item_cnt_month",
+    "validation": "chronological",
+    "submission_columns": [
+      "item_cnt_month"
+    ],
+    "risk_flags": [
+      "panel_series",
+      "clip_target"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/competitive-data-science-predict-future-sales"
+  },
+  {
+    "category": "timeseries",
+    "slug": "rossmann-store-sales",
+    "name": "Rossmann Store Sales",
+    "metric": "rmspe",
+    "direction": "min",
+    "target": "Sales",
+    "validation": "chronological",
+    "submission_columns": [
+      "Sales"
+    ],
+    "risk_flags": [
+      "panel_series",
+      "calendar"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/rossmann-store-sales"
+  },
+  {
+    "category": "timeseries",
+    "slug": "walmart-recruiting-store-sales-forecasting",
+    "name": "Walmart Recruiting - Store Sales Forecasting",
+    "metric": "weighted_mae",
+    "direction": "min",
+    "target": "Weekly_Sales",
+    "validation": "chronological",
+    "submission_columns": [
+      "Weekly_Sales"
+    ],
+    "risk_flags": [
+      "panel_series",
+      "holiday_weight"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/walmart-recruiting-store-sales-forecasting"
+  },
+  {
+    "category": "timeseries",
+    "slug": "web-traffic-time-series-forecasting",
+    "name": "Web Traffic Time Series Forecasting",
+    "metric": "smape",
+    "direction": "min",
+    "target": "Visits",
+    "validation": "rolling-origin",
+    "submission_columns": [
+      "Visits"
+    ],
+    "risk_flags": [
+      "many_series",
+      "missing"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/web-traffic-time-series-forecasting"
+  },
+  {
+    "category": "timeseries",
+    "slug": "recruit-restaurant-visitor-forecasting",
+    "name": "Recruit Restaurant Visitor Forecasting",
+    "metric": "rmsle",
+    "direction": "min",
+    "target": "visitors",
+    "validation": "chronological",
+    "submission_columns": [
+      "visitors"
+    ],
+    "risk_flags": [
+      "panel_series",
+      "reservations"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/recruit-restaurant-visitor-forecasting"
+  },
+  {
+    "category": "timeseries",
+    "slug": "favorita-grocery-sales-forecasting",
+    "name": "Corporación Favorita Grocery Sales Forecasting",
+    "metric": "nwrmsle",
+    "direction": "min",
+    "target": "unit_sales",
+    "validation": "chronological",
+    "submission_columns": [
+      "unit_sales"
+    ],
+    "risk_flags": [
+      "panel_series",
+      "perishable_weight"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/favorita-grocery-sales-forecasting"
+  },
+  {
+    "category": "timeseries",
+    "slug": "m5-forecasting-accuracy",
+    "name": "M5 Forecasting - Accuracy",
+    "metric": "wrmsse",
+    "direction": "min",
+    "target": "sales",
+    "validation": "rolling-origin",
+    "submission_columns": [
+      "F1"
+    ],
+    "risk_flags": [
+      "hierarchy",
+      "many_series"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/m5-forecasting-accuracy"
+  },
+  {
+    "category": "timeseries",
+    "slug": "ashrae-energy-prediction",
+    "name": "ASHRAE - Great Energy Predictor III",
+    "metric": "rmsle",
+    "direction": "min",
+    "target": "meter_reading",
+    "validation": "time-aware",
+    "submission_columns": [
+      "meter_reading"
+    ],
+    "risk_flags": [
+      "building_group",
+      "time_order"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/ashrae-energy-prediction"
+  },
+  {
+    "category": "timeseries",
+    "slug": "covid19-global-forecasting-week-5",
+    "name": "COVID19 Global Forecasting Week 5",
+    "metric": "pinball",
+    "direction": "min",
+    "target": "TargetValue",
+    "validation": "chronological",
+    "submission_columns": [
+      "TargetValue"
+    ],
+    "risk_flags": [
+      "quantile",
+      "multiple_targets"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/covid19-global-forecasting-week-5"
+  },
+  {
+    "category": "vision",
+    "slug": "digit-recognizer",
+    "name": "Digit Recognizer",
+    "metric": "accuracy",
+    "direction": "max",
+    "target": "label",
+    "validation": "stratified",
+    "submission_columns": [
+      "Label"
+    ],
+    "risk_flags": [
+      "multiclass",
+      "pixels"
+    ],
+    "classes": 10,
+    "source_url": "https://www.kaggle.com/competitions/digit-recognizer"
+  },
+  {
+    "category": "vision",
+    "slug": "dogs-vs-cats",
+    "name": "Dogs vs. Cats",
+    "metric": "log_loss",
+    "direction": "min",
+    "target": "label",
+    "validation": "stratified",
+    "submission_columns": [
+      "label"
+    ],
+    "risk_flags": [
+      "binary",
+      "images"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/dogs-vs-cats"
+  },
+  {
+    "category": "vision",
+    "slug": "cifar-10",
+    "name": "CIFAR-10 Object Recognition in Images",
+    "metric": "log_loss",
+    "direction": "min",
+    "target": "label",
+    "validation": "stratified",
+    "submission_columns": [
+      "label"
+    ],
+    "risk_flags": [
+      "multiclass",
+      "images"
+    ],
+    "classes": 10,
+    "source_url": "https://www.kaggle.com/competitions/cifar-10"
+  },
+  {
+    "category": "vision",
+    "slug": "Kannada-MNIST",
+    "name": "Kannada MNIST",
+    "metric": "accuracy",
+    "direction": "max",
+    "target": "label",
+    "validation": "stratified",
+    "submission_columns": [
+      "label"
+    ],
+    "risk_flags": [
+      "multiclass",
+      "pixels"
+    ],
+    "classes": 10,
+    "source_url": "https://www.kaggle.com/competitions/Kannada-MNIST"
+  },
+  {
+    "category": "vision",
+    "slug": "histopathologic-cancer-detection",
+    "name": "Histopathologic Cancer Detection",
+    "metric": "roc_auc",
+    "direction": "max",
+    "target": "label",
+    "validation": "stratified",
+    "submission_columns": [
+      "label"
+    ],
+    "risk_flags": [
+      "binary",
+      "images",
+      "imbalance"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/histopathologic-cancer-detection"
+  },
+  {
+    "category": "vision",
+    "slug": "aerial-cactus-identification",
+    "name": "Aerial Cactus Identification",
+    "metric": "roc_auc",
+    "direction": "max",
+    "target": "has_cactus",
+    "validation": "stratified",
+    "submission_columns": [
+      "has_cactus"
+    ],
+    "risk_flags": [
+      "binary",
+      "images"
+    ],
+    "classes": 2,
+    "source_url": "https://www.kaggle.com/competitions/aerial-cactus-identification"
+  },
+  {
+    "category": "vision",
+    "slug": "cassava-leaf-disease-classification",
+    "name": "Cassava Leaf Disease Classification",
+    "metric": "accuracy",
+    "direction": "max",
+    "target": "label",
+    "validation": "stratified",
+    "submission_columns": [
+      "label"
+    ],
+    "risk_flags": [
+      "multiclass",
+      "images",
+      "class_imbalance"
+    ],
+    "classes": 5,
+    "source_url": "https://www.kaggle.com/competitions/cassava-leaf-disease-classification"
+  },
+  {
+    "category": "vision",
+    "slug": "state-farm-distracted-driver-detection",
+    "name": "State Farm Distracted Driver Detection",
+    "metric": "log_loss",
+    "direction": "min",
+    "target": "classname",
+    "validation": "group-aware",
+    "submission_columns": [
+      "c0"
+    ],
+    "risk_flags": [
+      "multiclass",
+      "driver_leakage",
+      "images"
+    ],
+    "classes": 10,
+    "source_url": "https://www.kaggle.com/competitions/state-farm-distracted-driver-detection"
+  },
+  {
+    "category": "vision",
+    "slug": "aptos2019-blindness-detection",
+    "name": "APTOS 2019 Blindness Detection",
+    "metric": "quadratic_kappa",
+    "direction": "max",
+    "target": "diagnosis",
+    "validation": "stratified",
+    "submission_columns": [
+      "diagnosis"
+    ],
+    "risk_flags": [
+      "ordinal",
+      "images",
+      "imbalance"
+    ],
+    "classes": 5,
+    "source_url": "https://www.kaggle.com/competitions/aptos2019-blindness-detection"
+  },
+  {
+    "category": "vision",
+    "slug": "plant-pathology-2020-fgvc7",
+    "name": "Plant Pathology 2020 - FGVC7",
+    "metric": "roc_auc_macro",
+    "direction": "max",
+    "target": "labels",
+    "validation": "stratified",
+    "submission_columns": [
+      "healthy"
+    ],
+    "risk_flags": [
+      "multiclass",
+      "images"
+    ],
+    "classes": 4,
+    "source_url": "https://www.kaggle.com/competitions/plant-pathology-2020-fgvc7"
+  }
+]

@@ -1,115 +1,161 @@
 # AI DATA EXPERT
 
-**Codex에서 자동으로 사용할 수 있는 검증형 AI/Data Expert Copilot**
+**Codex에서 데이터 분석·ML/DL·Vision·Time-Series 작업을 더 안전하게 수행하기 위한 검증형 Repository Skill + Expert Harness**
 
-현재 기준 버전: **V4 Core (Frozen) + Clone-Ready Distribution**  
-상태: **Pre-Production / Expert Copilot**
+- 최신 기준: **V6.1 Candidate**
+- 상태: **Candidate / Pre-Production Expert Copilot**
+- Core regression: **44/44 PASS at freeze time**
+- Kaggle MASTER_EVAL V1 (proxy): **3835/4000 = 95.875**
+- MASTER_EVAL status: **35 PASS / 5 REVIEW / 0 FAIL**
+- 실제 Kaggle 원본 데이터 평가: **0/40** — Kaggle API 자격증명/원본 데이터가 필요함
 
-이 프로젝트의 목표는 단순히 모델을 자동 학습하는 것이 아닙니다.
+> 이 프로젝트의 목표는 높은 점수를 만드는 AutoML이 아니라, **잘못된 문제 정의·누수·부적절한 검증·과장된 결론을 먼저 의심하고 증거로 판단하는 데이터 분석 Agent**를 만드는 것입니다.
 
-> 문제 정의 → 데이터 의미 확인 → Domain Evidence 검색 → 전문가 선택 → 가설/실험 → 모델링 → 반박 → 검증 → PASS/REVIEW/FAIL
-
-의 흐름으로, **그럴듯하지만 잘못된 분석을 자동으로 거부하는 데이터 분석 Agent**를 만드는 것이 목표입니다.
-
-## 바로 설치해서 사용
-
-### Git clone
-
-```cmd
-git clone https://github.com/tmdgns104/AI_DATA_EXPERT.git
-cd AI_DATA_EXPERT
-setup_windows.bat
-```
-
-또는 GitHub에서 **Code → Download ZIP** 후 압축을 풀고 해당 폴더에서:
-
-```cmd
-setup_windows.bat
-```
-
-`setup_windows.bat`은 `.venv` 생성, 의존성 설치, demo 데이터 생성 후 `verify_install.py`로 **V4 Runtime import → 실제 Expert 분류 실행 → ML Route → Verifier**까지 확인합니다. 중간 단계가 실패하면 성공 메시지를 출력하지 않습니다.
-
-성공 기준:
+## V6.1 핵심 흐름
 
 ```text
-AI Data Expert V4 is ready.
-```
-
-그 다음 같은 폴더에서:
-
-```cmd
-codex
-```
-
-상세 설치: [`docs/INSTALL_KO.md`](docs/INSTALL_KO.md)
-
-## 현재 핵심 구조
-
-```text
-User / CSV / Notebook
+User / CSV / Notebook / Competition Task
         ↓
-TaskSpec
+TaskSpec V6.1
         ↓
-Intent Router
+Data Guard
         ↓
 Hybrid Domain RAG
-  ├─ BM25
-  ├─ Vector similarity
-  ├─ Metadata boost
-  └─ Structured facts
         ↓
-Data / ML / DL / Vision / TS / BigData / MLOps Experts
+Intent / Modality Router
         ↓
-Hypothesis + Experiment
+Data / ML / DL / Vision / Time-Series / BigData / MLOps Experts
         ↓
-Challenger
+Shared Evidence + Argument Ledger
         ↓
-Runtime Verifier
+Hypothesis / Experiment
+        ↓
+Local Challenger
+        ↓
+Modality Verifier
+        ↓
+CompetitionSpec / Competition Planner / Metric Guard (V6)
+        ↓
+Human-friendly Output
         ↓
 PASS / REVIEW / FAIL
 ```
 
-## V4 핵심
+## V4 → V6.1 주요 변화
 
-- Target missing을 새로운 Class로 취급하지 않고 **labeled / unlabeled 분리**
-- `_id`, 고유 Serial, 행 순서 Proxy 등 **식별자/순서 누수 자동 경고 및 제외**
-- 반복 Entity 또는 `Shot/Cycle/Sequence` reset을 이용한 **Group/Run split 후보 추론**
-- Test set을 모델/Threshold 선택에 사용하지 않는 **최종 Holdout 격리**
-- BM25 + Vector + Metadata + Structured Facts 기반 **Hybrid Domain RAG**
-- RAG 결과를 prediction time / group / unavailable feature / business cost에 반영
-- Notebook 실행뿐 아니라 Target missing, ID, Group overlap, Test isolation을 검사하는 **Semantic Validator**
-- Windows UTF-8 / fail-fast 설치 / Repository-local Jupyter 설정
-- PyTorch Tabular DL / Pixel CNN 실제 실행 경로
-- 희귀 클래스 표본이 너무 적으면 성능 숫자를 과신하지 않고 **REVIEW 유지**
-- PyTorch checkpoint는 `state_dict` 중심 안전 저장/재로딩 원칙 사용
-- Tacit Expert Heuristics + Source Trace
+### V4 — 데이터 안전 + Hybrid RAG
+- Target missing을 새로운 Class로 만들지 않고 labeled / unlabeled 분리
+- `_id`, unique serial, row-order proxy 등 식별자/순서 누수 경고 및 제외
+- 반복 Entity / Run / Time 구조 탐지와 split 후보 추론
+- Final Test를 모델/Threshold 선택에서 격리
+- BM25 + Vector + Metadata + Structured Facts 기반 Hybrid Domain RAG
+- Domain fact를 prediction time / group / feature eligibility / business cost에 적용
+- Semantic Notebook Validator
+
+### V5 — 논증형 분석 + Time-Series specialist
+- Shared Evidence Store
+- Argument Ledger
+- 질문 → 가설 → 증거 → 반증 → 임시결론 → 다음 질문 구조
+- Time-Series 전용 routing / verifier
+- timestamp integrity, chronological split, train-only scaling
+- Persistence baseline + SimpleRNN/LSTM 비교
+- 명시되지 않은 forecast horizon은 가정으로 숨기지 않고 REVIEW
+
+### V6 — Competition-aware planning
+- CompetitionSpec
+- Competition metric / direction / validation / submission contract
+- Competition Planner
+- Competition Verifier
+- generic metric이 대회 metric을 덮어쓰지 못하도록 guard
+- probability / class label / continuous submission mode 구분
+- complex metric은 원본 competition artifact가 없으면 APPROX/REVIEW로 남김
+
+### V6.1 — 회귀 수정
+V6 Freeze 후 기존 회귀에서 2개 문제를 발견해 V6을 Release하지 않았습니다.
+
+- `do not forecast` 같은 명시적 forecast negation 처리 수정
+- `next 24 hours`, `horizon=24h` 같은 explicit horizon을 UNKNOWN으로 떨어뜨리던 문제 수정
+
+수정 후 전체 회귀를 다시 통과한 상태에서 V6.1 Core를 Freeze했습니다.
 
 ## 검증 현황
 
 | 검증 | 결과 |
 |---|---:|
-| V4 improvement tests | **8/8 PASS** |
-| inherited V3 regression | **22/22 기능 PASS** |
-| V4 targeted sealed | **96/96 PASS** |
-| Clone-ready install smoke | **PASS** |
-| V4 Notebook E2E isolated rerun | **PASS** |
+| inherited V3 regression | **22/22 PASS** |
+| V4 improvement | **8/8 PASS** |
+| V5 time-series | **7/7 PASS** |
+| V6 competition | **5/5 PASS** |
+| V6.1 regression | **2/2 PASS** |
+| Freeze integrity | **PASS** |
+| Kaggle MASTER_EVAL V1 proxy | **95.875** |
+| MASTER_EVAL status | **35 PASS / 5 REVIEW / 0 FAIL** |
 
-> `96/96`은 V4에서 발견한 결함을 겨냥한 targeted regression/generalization 시험입니다. 실무 전체 정확도 100%를 의미하지 않습니다.
+`95.875`는 실제 Kaggle leaderboard 점수가 아닙니다. 40개 Kaggle competition의 문제/metric/validation 성격을 기준으로 만든 **내부 proxy benchmark**입니다. 실제 Kaggle 원본 데이터 coverage는 현재 `0/40`입니다.
 
-### 실제 Codex 사용 검증
+상세 결과:
+- [`KAGGLE_MASTER_EVAL_V6_1_REPORT_KO.md`](KAGGLE_MASTER_EVAL_V6_1_REPORT_KO.md)
+- [`KPI_V6_1.json`](KPI_V6_1.json)
+- [`FINAL_STATUS_V6_1.json`](FINAL_STATUS_V6_1.json)
+- [`V6_1_CORE_FREEZE.json`](V6_1_CORE_FREEZE.json)
 
-2026-08-26 실제 사용으로 추가 검증했습니다.
+## 현재 확인된 약점
 
-- **극단적 불균형 DNN 분류**: 3,000행 중 불량 9건. Accuracy를 성공 기준으로 삼지 않고 Macro-F1, Balanced Accuracy, defect Recall, PR-AUC를 사용. 운영 판단 `REVIEW`.
-- **3-class Vision CNN**: 실제 이미지 픽셀 학습, Train/Validation/Test 중복 검사, best checkpoint 복원, 저장 모델 안전 재로딩 검증. Test Accuracy **0.9444**, Macro-F1 **0.9441**.
+V6.1은 아래 문제를 숨기지 않고 다음 버전 개선 대상으로 남겨둡니다.
 
-상세: [`docs/REAL_VALIDATION_KO.md`](docs/REAL_VALIDATION_KO.md)
+1. **Time + Group 복합 Validation 부족**
+   - Bike Sharing / IEEE Fraud 같은 문제에서 group-aware와 temporal validation을 함께 고려해야 함
+2. **Competition 고유 metric adapter 부족**
+   - M5 WRMSSE
+   - COVID Week 5 weighted pinball
+3. **Time-Series 일반 후보 모델 경쟁력 부족**
+   - proxy 10/10에서 Persistence baseline을 이기지 못함
+4. **Vision proxy 난이도 부족**
+   - 현재 100점은 실제 Kaggle Vision 일반화 성능을 의미하지 않음
+5. **실제 Kaggle/MLE-bench 실행 미완료**
+   - 실제 competition data / leaderboard evaluation 필요
 
-## 사용 예
+## 빠른 시작
 
-설치가 끝나면 demo CSV가 `examples/`에 자동 생성됩니다.
+### 1. 설치
 
-Codex에서:
+Windows:
+
+```cmd
+setup_windows.bat
+```
+
+직접 설치:
+
+```cmd
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+선택적으로 Embedding + FAISS RAG:
+
+```cmd
+setup_rag_embeddings_windows.bat
+```
+
+### 2. Codex 실행
+
+Repository 루트에서:
+
+```cmd
+codex
+```
+
+예:
+
+```text
+이 CSV를 분석해줘.
+Target 의미, 데이터 누수, 적절한 split, baseline, 실패 segment,
+최종 운영 판단까지 검토해줘.
+```
+
+Notebook 과제:
 
 ```text
 examples/DNN_regression_question.ipynb 문제를 풀어서
@@ -117,62 +163,79 @@ outputs/answer.ipynb로 만들어줘.
 데이터는 examples/4_manufacturing_yield.csv를 사용해.
 ```
 
-Codex 없이 demo:
+Repository Skill:
 
-```cmd
-run_demo_without_codex.bat
+```text
+.agents/skills/ai-data-expert/SKILL.md
 ```
 
-Harness 직접 실행:
+### 3. Harness 직접 실행
 
 ```cmd
-.venv\Scripts\python.exe .agents\skills\ai-data-expert\scripts\run_expert.py ^
+python .agents\skills\ai-data-expert\scripts\run_expert.py ^
   --csv examples\4_manufacturing_yield.csv ^
-  --task "estimate yield_percentage from process variables" ^
+  --task "수율을 예측하고 누수, split, baseline, 운영 위험을 검토" ^
   --target yield_percentage ^
   --prediction-time "before process completion" ^
   --out outputs\expert_context.json
 ```
 
-Repository Skill: `.agents/skills/ai-data-expert/SKILL.md`
-
-## Hybrid RAG
-
-기본 설치에서는 BM25 + offline vector fallback을 사용할 수 있습니다. Embedding + FAISS를 추가하려면:
+Time-Series의 경우 timestamp/horizon을 명시할 수 있습니다.
 
 ```cmd
-setup_rag_embeddings_windows.bat
+python .agents\skills\ai-data-expert\scripts\run_expert.py ^
+  --csv series.csv ^
+  --task "forecast the next 24 hours" ^
+  --target target ^
+  --modality time-series ^
+  --timestamp-col timestamp ^
+  --horizon 24h ^
+  --out outputs\forecast_context.json
 ```
 
-회사/프로젝트 문서는 `domain_knowledge/`에 넣거나 `--domain-path`로 지정합니다.
+> `solve_timeseries_rnn_v5.py`는 현재 포함된 Steel Industry 연습 데이터 구조에 맞춘 전용 notebook solver입니다. 범용 시계열 solver로 과장하지 않습니다.
+
+## Domain RAG
+
+`domain_knowledge/`에 조직/공정 근거를 넣거나 `--domain-path`로 추가합니다.
+
+권장 자료:
+
+```text
+data_dictionary.md
+process_flow.md
+sensor_spec.md
+quality_standard.md
+defect_definition.md
+incident_history.md
+operational_constraints.json
+```
+
+RAG의 역할은 단순 참고문 출력이 아닙니다. 구조화된 근거가 있으면 TaskSpec의 prediction time, group id, 사용 불가능 feature, business cost 판단을 바꿀 수 있습니다.
 
 ## 상태 의미
 
-- **PASS**: 현재 검증 계약에서 치명적 문제 없음
-- **REVIEW**: 분석 가능하지만 예측 시점, 비용, 라벨 의미, Group 정의, 표본 수 등 중요한 불확실성이 남음
-- **FAIL**: Expert 실행 실패 또는 leakage/validation 계약 위반으로 결과 승격 금지
+- **PASS**: 현재 evidence/verification contract에서 치명적 위반을 발견하지 못함
+- **REVIEW**: 분석은 가능하지만 중요한 불확실성·가정·데이터 부족이 남음
+- **FAIL**: leakage, 실행 실패, contract 위반 등으로 결과 승격 금지
+
+`REVIEW`는 실패가 아니라, 모르는 것을 PASS로 포장하지 않기 위한 정상 상태입니다.
 
 ## 문서
 
-- [설치 가이드](docs/INSTALL_KO.md)
 - [사용 설명서](docs/USAGE_KO.md)
 - [아키텍처](docs/ARCHITECTURE_KO.md)
-- [연구 일지](docs/RESEARCH_LOG_KO.md)
 - [개발 기록](docs/DEVELOPMENT_LOG_KO.md)
-- [실사용 검증 기록](docs/REAL_VALIDATION_KO.md)
-- [V4 Hybrid RAG / 실사용 개선 보고서](V4_HYBRID_RAG_AND_USAGE_REPORT_KO.md)
-- [현재 테스트 상태](TEST_STATUS.json)
-- [V4 Sealed 결과](evaluation/sealed/SEALED_RESULTS_V4.json)
+- [연구 일지](docs/RESEARCH_LOG_KO.md)
+- [실사용 검증](docs/REAL_VALIDATION_KO.md)
+- [V4 Hybrid RAG 보고서](V4_HYBRID_RAG_AND_USAGE_REPORT_KO.md)
+- [V5 RNN Simulation 보고서](V5_RNN_SIMULATION_REPORT_KO.md)
+- [V6.1 Kaggle MASTER_EVAL 보고서](KAGGLE_MASTER_EVAL_V6_1_REPORT_KO.md)
 
-## 현재 한계
+## Release 정책
 
-- `sentence-transformers + FAISS` 경로는 구현되어 있으나 기존 V4 Sandbox 평가는 **BM25 + char-TFIDF fallback** 기준
-- 실제 Domain RAG 품질은 Data Dictionary / Sensor Spec / Process Flow / Quality Spec 품질에 의존
-- Group/Run 추론은 휴리스틱일 수 있으므로 MES/Batch 실제 lineage가 있으면 그것을 우선해야 함
-- Vision / Tabular / Time-Series의 의미 검증 계약은 다음 버전에서 modality별로 더 분리할 필요가 있음
-- Expert 간 공용 Evidence State가 더 필요함
-- 완전 자율 Production 승인 도구가 아니라 **Human Review가 가능한 Expert Copilot** 단계
-
-## 다음 개선 전 원칙
-
-V4 핵심 분석 Runtime과 평가 결과는 기준선으로 보존합니다. 설치/배포 hardening은 별도 release 기록으로 남기며, 다음 기능 개선은 V5에서 진행합니다.
+- 과거 Freeze 파일과 실패 증거를 덮어쓰지 않습니다.
+- V6은 회귀 실패가 발견되어 Release 기준선으로 승격하지 않았습니다.
+- 현재 `main` 기준 최신 코드는 **V6.1 Candidate**입니다.
+- V6.1도 아직 Production Release가 아닙니다.
+- 다음 개선은 V6.1 Freeze를 보존한 채 새 버전에서 진행합니다.

@@ -1,0 +1,15 @@
+{
+  "version": "AI_DATA_EXPERT_V5_CANDIDATE",
+  "freeze_type": "TARGETED_SIMULATION_CANDIDATE_NOT_SEALED",
+  "note": "The uploaded RNN exercise was used during V5 development, so this is not a blind sealed holdout.",
+  "files": {
+    "data_expert/v5_system.py": "23dace98369588eafe64a33ede333472e66fa9015457cbfb0bcf3a6c324469f6",
+    "data_expert/task_spec_v5.py": "056f23a24653eba410179c81a10ae01104feddd151e4ff9f9c1a2f179b0d3d4d",
+    "data_expert/shared_evidence_v5.py": "fbd4ca6673df0a21166b1eb72a08524790ed214f2ca8cf8630444511224b0282",
+    "data_expert/argument_ledger_v5.py": "5ec3acdfaa53117667e534c52aff923757c6b20b87bd7d03b2deb77d2e9673d1",
+    "data_expert/domain_rag_v5.py": "edd1c3791e7fda445db72d0cc2c06b894ab2dd4d27a151140324fda967258a13",
+    "data_expert/challenger_v5.py": "ed11042c716ecd90ce8ce8761653ee07b393602aa2c85324e49075f519fe6f57",
+    "data_expert/time_series_dl_v5.py": "0b4bb37c4e5f81cabc164e9d34878e9132c04e152503cb2b413e4c228ac89681",
+    ".agents/skills/ai-data-expert/scripts/solve_timeseries_rnn_v5.py": "82c325ac9dfb998b09dc2281853967c1c4821b05af7054b7ed11e8e4a61c4b06"
+  }
+}

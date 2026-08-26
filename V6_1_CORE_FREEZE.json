@@ -1,0 +1,22 @@
+{
+  "version": "V6.1_CANDIDATE",
+  "freeze_type": "CORE_AFTER_FULL_REGRESSION_BEFORE_KAGGLE_MASTER_EVAL_40",
+  "frozen_at": "2026-08-26",
+  "tests_before_freeze": {"inherited_v3":"22/22 PASS","v4":"8/8 PASS","v5":"7/7 PASS","v6":"5/5 PASS","v6_1":"2/2 PASS"},
+  "hashes": {
+    "data_expert/enhanced_system.py": "e7c449dcb85c29bcac35b94e198167748429bdb6cf589bc354676a4ab03aa22b",
+    "data_expert/v6_1_system.py": "83c9140be88686480e358f8a747467df6f9d4fee2bcbf0dda7d00a8e53173dc7",
+    "data_expert/task_spec_v61.py": "80ce8b0e604cb80142579399326f396aef2c2909358593569750d3311ad52329",
+    "data_expert/challenger_v61.py": "68b920c87174453f4892e0139b6e14969d7a6c8400b8b2a84bcf54abde8a21e3",
+    "data_expert/modality_verifier_v61.py": "aa705802ed6ff1c6ec07bde27452381b7a75b925a9a09e06591527398348ff76",
+    "data_expert/v6_system.py": "95bc4edc76d9ae34afa42f6c3302e50e24f31704a340ee62ad5a4d36878c98bc",
+    "data_expert/competition_spec_v6.py": "72b55a99a75e03c7911a2dba0feb2d9005d20628eadeead2c6cc418cf41d19df",
+    "data_expert/competition_planner_v6.py": "51a46a97dcfef2725ea360786e44756c926aa3e9e9127499bdee23a8af41922d",
+    "data_expert/competition_verifier_v6.py": "2b966f1ef3a6925938c5cf22a9238b923379aac6b95cdcf82b65120c0a705d27",
+    "data_expert/output_renderer_v6.py": "cbfa3f868d4f3a5a8a0ef56c3fa7b854f61dcf546d39e27aef8d5f23355782e7",
+    "data_expert/v5_system.py": "23dace98369588eafe64a33ede333472e66fa9015457cbfb0bcf3a6c324469f6",
+    "data_expert/data_guard_v4.py": "ac8839656e72ed5cb9561a0ec7d1a53e65e1b89082dbd45c3e7fbd67f56ebbea",
+    ".agents/skills/ai-data-expert/OUTPUT_STYLE_CONTRACT_KO.md": "027a0c425084f076ae12ee50f74a9da5f69cf8ae0892c3813660d883adacb59d"
+  },
+  "note": "V6 was rejected after 2 inherited regression failures. V6.1 fixes only negated-forecast and explicit-horizon contract regressions before this freeze."
+}

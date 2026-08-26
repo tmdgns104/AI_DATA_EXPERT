@@ -1,0 +1,41 @@
+category,slug,name,metric,score,status,failed_components,model_better,metric_exact,inferred_validation,data_mode
+regression,house-prices-advanced-regression-techniques,House Prices - Advanced Regression Techniques,log_rmse,100,PASS,,True,True,kfold,PROXY_DATA
+regression,bike-sharing-demand,Bike Sharing Demand,rmsle,85,REVIEW,correct_validation,True,True,group-aware,PROXY_DATA
+regression,allstate-claims-severity,Allstate Claims Severity,mae,100,PASS,,True,True,kfold,PROXY_DATA
+regression,mercedes-benz-greener-manufacturing,Mercedes-Benz Greener Manufacturing,r2,100,PASS,,True,True,kfold,PROXY_DATA
+regression,restaurant-revenue-prediction,Restaurant Revenue Prediction,rmse,100,PASS,,True,True,kfold,PROXY_DATA
+regression,new-york-city-taxi-fare-prediction,New York City Taxi Fare Prediction,rmse,100,PASS,,True,True,kfold,PROXY_DATA
+regression,nyc-taxi-trip-duration,NYC Taxi Trip Duration,rmsle,100,PASS,,True,True,chronological,PROXY_DATA
+regression,sberbank-russian-housing-market,Sberbank Russian Housing Market,rmsle,100,PASS,,True,True,chronological,PROXY_DATA
+regression,grupo-bimbo-inventory-demand,Grupo Bimbo Inventory Demand,rmsle,100,PASS,,True,True,group-aware,PROXY_DATA
+regression,champs-scalar-coupling,CHAMPS Scalar Coupling,log_mae_by_type,100,PASS,,True,True,group-aware,PROXY_DATA
+classification,titanic,Titanic - Machine Learning from Disaster,accuracy,100,PASS,,True,True,stratified,PROXY_DATA
+classification,spaceship-titanic,Spaceship Titanic,accuracy,85,REVIEW,correct_validation,True,True,group-aware,PROXY_DATA
+classification,santander-customer-transaction-prediction,Santander Customer Transaction Prediction,roc_auc,100,PASS,,True,True,stratified,PROXY_DATA
+classification,home-credit-default-risk,Home Credit Default Risk,roc_auc,100,PASS,,True,True,stratified,PROXY_DATA
+classification,ieee-fraud-detection,IEEE-CIS Fraud Detection,roc_auc,85,REVIEW,correct_validation,True,True,group-aware,PROXY_DATA
+classification,otto-group-product-classification-challenge,Otto Group Product Classification,log_loss,100,PASS,,True,True,stratified,PROXY_DATA
+classification,forest-cover-type-prediction,Forest Cover Type Prediction,accuracy,100,PASS,,True,True,stratified,PROXY_DATA
+classification,dont-overfit-ii,Don’t Overfit! II,roc_auc,100,PASS,,True,True,stratified,PROXY_DATA
+classification,cat-in-the-dat-ii,Categorical Feature Encoding Challenge II,roc_auc,100,PASS,,True,True,stratified,PROXY_DATA
+classification,porto-seguro-safe-driver-prediction,Porto Seguro’s Safe Driver Prediction,gini,100,PASS,,True,True,stratified,PROXY_DATA
+timeseries,store-sales-time-series-forecasting,Store Sales - Time Series Forecasting,rmsle,90,PASS,modeling,False,True,chronological,PROXY_DATA
+timeseries,competitive-data-science-predict-future-sales,Predict Future Sales,rmse,90,PASS,modeling,False,True,chronological,PROXY_DATA
+timeseries,rossmann-store-sales,Rossmann Store Sales,rmspe,90,PASS,modeling,False,True,chronological,PROXY_DATA
+timeseries,walmart-recruiting-store-sales-forecasting,Walmart Recruiting - Store Sales Forecasting,weighted_mae,90,PASS,modeling,False,True,chronological,PROXY_DATA
+timeseries,web-traffic-time-series-forecasting,Web Traffic Time Series Forecasting,smape,90,PASS,modeling,False,True,rolling-origin,PROXY_DATA
+timeseries,recruit-restaurant-visitor-forecasting,Recruit Restaurant Visitor Forecasting,rmsle,90,PASS,modeling,False,True,chronological,PROXY_DATA
+timeseries,favorita-grocery-sales-forecasting,Corporación Favorita Grocery Sales Forecasting,nwrmsle,90,PASS,modeling,False,True,chronological,PROXY_DATA
+timeseries,m5-forecasting-accuracy,M5 Forecasting - Accuracy,wrmsse,80,REVIEW,metric_understanding;modeling,False,False,rolling-origin,PROXY_DATA
+timeseries,ashrae-energy-prediction,ASHRAE - Great Energy Predictor III,rmsle,90,PASS,modeling,False,True,chronological,PROXY_DATA
+timeseries,covid19-global-forecasting-week-5,COVID19 Global Forecasting Week 5,pinball,80,REVIEW,metric_understanding;modeling,False,False,chronological,PROXY_DATA
+vision,digit-recognizer,Digit Recognizer,accuracy,100,PASS,,True,True,stratified,PROXY_DATA
+vision,dogs-vs-cats,Dogs vs. Cats,log_loss,100,PASS,,True,True,stratified,PROXY_DATA
+vision,cifar-10,CIFAR-10 Object Recognition in Images,log_loss,100,PASS,,True,True,stratified,PROXY_DATA
+vision,Kannada-MNIST,Kannada MNIST,accuracy,100,PASS,,True,True,stratified,PROXY_DATA
+vision,histopathologic-cancer-detection,Histopathologic Cancer Detection,roc_auc,100,PASS,,True,True,stratified,PROXY_DATA
+vision,aerial-cactus-identification,Aerial Cactus Identification,roc_auc,100,PASS,,True,True,stratified,PROXY_DATA
+vision,cassava-leaf-disease-classification,Cassava Leaf Disease Classification,accuracy,100,PASS,,True,True,stratified,PROXY_DATA
+vision,state-farm-distracted-driver-detection,State Farm Distracted Driver Detection,log_loss,100,PASS,,True,True,group-aware,PROXY_DATA
+vision,aptos2019-blindness-detection,APTOS 2019 Blindness Detection,quadratic_kappa,100,PASS,,True,True,stratified,PROXY_DATA
+vision,plant-pathology-2020-fgvc7,Plant Pathology 2020 - FGVC7,roc_auc_macro,100,PASS,,True,True,stratified,PROXY_DATA

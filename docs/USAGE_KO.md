@@ -1,21 +1,23 @@
-# AI DATA EXPERT V4 사용 설명서
+# AI DATA EXPERT V6.1 Candidate 사용 설명서
 
-## 1. 목적
+## 1. 무엇을 하는 도구인가
 
-AI DATA EXPERT는 Codex에서 데이터 분석/ML/DL/Vision/Time-Series/MLOps/Big Data 작업을 요청할 때 자동으로 사용할 수 있는 Repository Skill + Expert Harness입니다.
+AI DATA EXPERT는 Codex에서 데이터 분석/ML/DL/Vision/Time-Series/MLOps/Big Data 작업을 요청할 때 사용하는 Repository Skill + Expert Harness입니다.
 
-일반적인 AutoML처럼 모델만 돌리지 않고 다음을 먼저 확인합니다.
+모델부터 돌리지 않고 먼저 다음을 확인합니다.
 
-1. 무엇을 예측/분석하는가
-2. 한 행의 관측 단위는 무엇인가
-3. Target의 의미와 결측은 무엇인가
-4. 예측 시점에 실제 사용할 수 있는 Feature인가
-5. Group/Entity/Time 구조가 있는가
-6. 어떤 Split이 현실적인가
-7. Baseline보다 실제로 나은가
-8. Test set을 선택에 사용하지 않았는가
-9. 실패하는 Class/Segment는 어디인가
-10. 운영 적용을 PASS로 해도 되는가
+1. 관측 단위와 Target이 무엇인가
+2. Target missing은 label 부재인가 새로운 상태인가
+3. 예측 시점에 Feature를 실제 사용할 수 있는가
+4. ID/row order/group/time leakage가 있는가
+5. 어떤 split이 실제 일반화 조건과 맞는가
+6. Baseline보다 복잡한 모델이 실제로 나은가
+7. final Test가 선택 과정에서 오염되지 않았는가
+8. minority/segment/OOD failure가 숨겨져 있지 않은가
+9. 반대 가설을 검토했는가
+10. PASS/REVIEW/FAIL 중 어떤 결론이 정당한가
+
+Competition task에서는 metric/direction/submission contract도 먼저 고정합니다.
 
 ## 2. Windows 설치
 
@@ -32,13 +34,11 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-### 선택: Embedding + FAISS RAG
+선택: Embedding + FAISS RAG
 
 ```cmd
 setup_rag_embeddings_windows.bat
 ```
-
-`requirements-rag-optional.txt`에는 optional semantic retrieval dependency가 정리되어 있습니다.
 
 ## 3. Codex에서 사용
 
@@ -48,11 +48,12 @@ setup_rag_embeddings_windows.bat
 codex
 ```
 
-자연어로 요청합니다.
+예:
 
 ```text
-이 CSV를 분석해서 Target을 예측해줘.
-데이터 누수, 적절한 분할, baseline, 평가 방법과 운영 위험까지 확인해줘.
+이 CSV를 분석해줘.
+Target 의미, 결측, 누수, 적절한 split, baseline, 실패 segment,
+운영 적용 위험까지 확인해줘.
 ```
 
 Notebook 과제:
@@ -63,19 +64,17 @@ outputs/answer.ipynb로 만들어줘.
 데이터는 examples/4_manufacturing_yield.csv야.
 ```
 
-Skill 이름을 직접 말하고 싶다면 `$ai-data-expert`를 명시해도 됩니다.
-
 ## 4. Harness 직접 실행
 
 ```cmd
 python .agents\skills\ai-data-expert\scripts\run_expert.py ^
   --csv examples\4_manufacturing_yield.csv ^
-  --task "수율을 예측하고 데이터 품질, 누수, 평가 방식을 검토" ^
+  --task "수율 예측 + 데이터 품질 + 누수 + 검증 전략 검토" ^
   --target yield_percentage ^
   --out outputs\expert_context.json
 ```
 
-중요한 업무 맥락을 알고 있다면 명시하는 것이 좋습니다.
+업무 맥락을 알고 있으면 명시합니다.
 
 ```cmd
 python .agents\skills\ai-data-expert\scripts\run_expert.py ^
@@ -87,107 +86,118 @@ python .agents\skills\ai-data-expert\scripts\run_expert.py ^
   --out outputs\result.json
 ```
 
-## 5. Domain RAG 사용
+## 5. Time-Series
 
-`domain_knowledge/`에 조직/공정 지식을 넣습니다.
+시간 컬럼과 horizon을 가능한 명시합니다.
 
-권장 문서:
+```cmd
+python .agents\skills\ai-data-expert\scripts\run_expert.py ^
+  --csv series.csv ^
+  --task "forecast the next 24 hours" ^
+  --target target ^
+  --modality time-series ^
+  --timestamp-col timestamp ^
+  --horizon 24h ^
+  --out outputs\forecast_context.json
+```
+
+반대로:
 
 ```text
-domain_knowledge/
-├─ data_dictionary.md
-├─ process_flow.md
-├─ sensor_spec.md
-├─ quality_standard.md
-├─ defect_definition.md
-├─ incident_history.md
-└─ operational_constraints.json
+historical time-series analysis only; do not forecast
 ```
 
-Structured fact 예:
+처럼 명시하면 forecast-only verifier를 요구하지 않는 것이 V6.1 계약입니다.
 
-```json
-{
-  "facts": [
-    {
-      "type": "prediction_time",
-      "target": "defect",
-      "value": "after camera exposure before eject"
-    },
-    {
-      "type": "group_id",
-      "target": "defect",
-      "field": "lot_code"
-    },
-    {
-      "type": "feature_unavailable",
-      "target": "defect",
-      "field": "post_inspection_code"
-    }
-  ]
-}
+`solve_timeseries_rnn_v5.py`는 현재 포함된 Steel Industry 연습 데이터 구조를 위한 전용 notebook solver입니다. 범용 시계열 solver가 아닙니다.
+
+## 6. Domain RAG
+
+`domain_knowledge/` 또는 `--domain-path`를 사용합니다.
+
+추천 문서:
+
+```text
+data_dictionary.md
+process_flow.md
+sensor_spec.md
+quality_standard.md
+defect_definition.md
+incident_history.md
+operational_constraints.json
 ```
 
-검색된 지식은 단순 참고 문장으로 끝나지 않고 TaskSpec과 Feature/Group/Prediction-time 판단에 연결됩니다.
+검색된 근거는 source/provenance를 유지해야 하며, structured fact가 있을 때만 prediction time / group / unavailable feature / cost를 TaskSpec에 반영합니다.
 
-## 6. Notebook 도구
+## 7. Notebook 도구
 
-Notebook 구조 확인:
+구조 확인:
 
 ```cmd
 python .agents\skills\ai-data-expert\scripts\inspect_notebook.py question.ipynb
 ```
 
-자동 Solver:
+일반 tabular solver:
 
 ```cmd
 python .agents\skills\ai-data-expert\scripts\solve_notebook.py ^
   --input question.ipynb ^
+  --data data.csv ^
   --output answer.ipynb
 ```
 
-실행/검증:
+검증:
 
 ```cmd
 python .agents\skills\ai-data-expert\scripts\validate_notebook.py answer.ipynb --timeout 300
 ```
 
-## 7. 결과 상태 읽기
+## 8. Competition-aware planning
+
+V6 계층은 CompetitionSpec을 통해 다음을 고정합니다.
+
+- target
+- metric
+- metric direction
+- category
+- validation contract
+- risk flags
+- submission mode
+- exact metric runtime 가능 여부
+
+복잡한 competition metric이 hierarchy/weight 같은 원본 artifact를 필요로 하는데 파일이 없으면 generic RMSE로 바꿔치기하지 않고 `SPEC_KNOWN_RUNTIME_APPROX` / `REVIEW`로 남깁니다.
+
+## 9. 결과 상태
 
 ### PASS
-현재 Evidence에서 치명적인 분석 계약 위반이 없음.
+현재 evidence/contract에서 치명적 위반이 발견되지 않음.
 
 ### REVIEW
-다음과 같은 경우 정상적인 결과입니다.
+분석은 가능하지만 중요한 uncertainty/assumption이 남음.
 
-- Prediction time UNKNOWN
-- Business cost UNKNOWN
-- 양성/불량 표본이 너무 적음
-- Group/Run이 추론값임
-- Domain evidence 부족
-- 운영 적용에 필요한 metadata 부족
+예:
+- prediction time UNKNOWN
+- rare positive support 부족
+- inferred group/run
+- competition metric artifact 부족
+- model이 baseline을 안정적으로 이기지 못함
 
 ### FAIL
+- 실행 실패
+- leakage/validation contract 위반
+- 필요한 expert/verification 실패
 
-- Expert 실행 오류
-- Test leakage
-- Target/Feature 계약 위반
-- 필요한 Expert 미실행
-- 실행 결과가 분석 계약과 충돌
+## 10. 현재 추천 용도
 
-## 8. 추천 사용 방식
-
-현재 V4는 다음 용도에 적합합니다.
-
+적합:
 - EDA / Data Quality Review
 - Tabular Regression / Classification
 - 불균형 분류 검토
-- Notebook 과제/실습 초안 및 검증
-- PyTorch Tabular DL
-- Vision Dataset / CNN 학습 검토
-- Time-Series 설계 검토
-- Survival 분석 검토
-- MLOps Drift 검토
-- Big Data Architecture 검토
+- Notebook 과제/실습 검증
+- PyTorch Tabular DL / Vision 검토
+- Time-Series 설계 및 sequence exercise 검토
+- Competition metric/validation planning
+- MLOps Drift review
+- Big Data architecture review
 
-Production 자동 승인, 자동 재학습, 인과 결론은 사람 검토 없이 사용하지 않습니다.
+아직 자동 Production 승인, 자동 재학습, 무검토 인과 결론, 실제 Kaggle leaderboard 성능 보장은 하지 않습니다.
