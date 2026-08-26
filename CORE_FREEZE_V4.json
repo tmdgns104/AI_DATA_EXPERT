@@ -1,0 +1,17 @@
+{
+  "version": "AI_DATA_EXPERT_CODEX_SKILL_V4",
+  "scope": "analysis core and notebook execution baseline",
+  "note": "Distribution files such as setup_windows.bat, requirements.txt, README and reusable SKILL guidance may receive clone-ready hardening without changing the benchmarked V4 analysis core. V5 feature work must not mutate these frozen core files in place.",
+  "sha256": {
+    "data_expert/v4_system.py": "32bb3cabb8f4dededc84199c302c7f3b9533820ef36ed0caba9fc5af2675e8d1",
+    "data_expert/domain_rag_v4.py": "50bc25b07ebdbffe72ebb7877624bfafbe865aba8fd260cdecc0d640caaa3116",
+    "data_expert/data_guard_v4.py": "ac8839656e72ed5cb9561a0ec7d1a53e65e1b89082dbd45c3e7fbd67f56ebbea",
+    "data_expert/task_spec_v4.py": "0ad037ac836cf44db2751fbf4c8a3ce5708db495a5ee3fca6cba9979b72e089c",
+    "data_expert/advanced_ml_v4.py": "01eeb123883c6d137dfa21f94793e405a8ab1d94c37ad6dc3c85281bc872bdd9",
+    "data_expert/dl_engine_v4.py": "4078a3daa08c07652b55f14b8fcb09d4c50277c4c6b546433e71d08ec7af4e0f",
+    "data_expert/hypothesis_engine_v4.py": "bde9b2e8c67415d70b4ea2cea3f0555e7d8c7302317a05582eb3514256cd50f6",
+    "data_expert/challenger_v4.py": "5539aa3ebe80e7eae7c7a963240e850a956ad3cc18cf5ae4e12112de0a1e8d7c",
+    ".agents/skills/ai-data-expert/scripts/solve_notebook.py": "c1354d7daad066fdc508d37b1e7c5d33f35ae858ddf705ac261d6cded98cbb93",
+    ".agents/skills/ai-data-expert/scripts/validate_notebook.py": "1c0e937fe1538851a92d27bfdd4771a06399b7777d0dff6f3933f3c4b465ac56"
+  }
+}
