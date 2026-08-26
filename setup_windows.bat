@@ -21,6 +21,8 @@ if errorlevel 1 goto :fail
 python -m pip install -r requirements.txt
 if errorlevel 1 goto :fail
 
+python examples\generate_demo_data.py
+if errorlevel 1 goto :fail
 python verify_install.py
 if errorlevel 1 goto :fail
 
