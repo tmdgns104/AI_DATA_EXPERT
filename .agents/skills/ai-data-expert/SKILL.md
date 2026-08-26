@@ -107,11 +107,13 @@ python .agents/skills/ai-data-expert/scripts/validate_notebook.py <answer.ipynb>
 - **Test isolation:** model/hyperparameter/threshold selection cannot use final Test.
 - **Baselines:** complex models must beat defensible simple baselines.
 - **Metrics:** match the problem and business loss; accuracy alone is insufficient under imbalance.
-- **Calibration/threshold:** probability decisions need probability-quality and threshold review.
+- **Rare-event gate:** if the minority/positive class is so small that Validation/Test contain only a handful of positive examples, keep operational readiness at `REVIEW`, report support counts, and do not present one threshold or recall estimate as stable.
+- **Calibration/threshold:** probability decisions need probability-quality and threshold review. If business FP/FN cost is unknown, do not claim one threshold is operationally optimal.
 - **Failure analysis:** inspect worst rows/segments, not only overall score.
 - **Uncertainty/OOD:** surface uncertainty or distribution-shift risk when practical.
 - **Causality:** predictive importance is not intervention effect.
 - **Deep learning:** when actual inputs are available, require PyTorch execution, small-batch overfit sanity, and best-validation checkpoint evidence.
+- **Safe PyTorch checkpoint:** prefer saving/loading model `state_dict` plus explicit metadata; when loading PyTorch checkpoints use `weights_only=True` when supported and verify a known-batch prediction after reload. Do not make successful reload depend on unsafe arbitrary pickle deserialization.
 - **Vision:** define classification/detection/segmentation/anomaly task first; guard product/source leakage and augmentation-label semantics.
 - **Forecast:** chronological/rolling validation and naive/seasonal-naive baseline.
 - **MLOps:** drift does not automatically authorize retraining; investigate pipeline/process/root cause.
@@ -139,4 +141,4 @@ The Runtime Verifier checks the reasoning contract, expert execution, required b
 
 ## 7. Version discipline
 
-Parent Tacit heuristics/sources remain provenance-frozen. V3 changes are layered in new runtime modules. V3 remains frozen. V4 fixes are layered separately and must be frozen before new sealed evaluation.
+Parent Tacit heuristics/sources remain provenance-frozen. V3 changes are layered in new runtime modules. V3 remains frozen. V4 core analysis runtime remains the benchmarked baseline; clone-ready setup/dependency hardening and reusable Skill rules are recorded separately in the release manifest before V5 work begins.
