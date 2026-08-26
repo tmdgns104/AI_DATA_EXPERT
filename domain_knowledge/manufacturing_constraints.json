@@ -1,0 +1,23 @@
+{
+  "title": "Synthetic manufacturing constraints for bundled demo only",
+  "warning": "Synthetic test knowledge, not a real factory specification.",
+  "facts": [
+    {
+      "type": "prediction_time",
+      "target": "yield_percentage",
+      "value": "before process completion"
+    },
+    {
+      "type": "feature_unavailable",
+      "field": "processing_time_sec",
+      "value": "available only after the prediction point",
+      "target": "yield_percentage"
+    },
+    {
+      "type": "feature_unavailable",
+      "field": "power_consumption",
+      "value": "may not be complete at the prediction point",
+      "target": "yield_percentage"
+    }
+  ]
+}
