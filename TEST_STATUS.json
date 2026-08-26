@@ -1,0 +1,21 @@
+{
+  "version": "AI_DATA_EXPERT_CODEX_SKILL_V4",
+  "core_validation": {
+    "v4_improvement_tests": "8/8 PASS",
+    "inherited_v3_regression": "22/22 PASS",
+    "targeted_sealed": "96/96 PASS",
+    "freeze_integrity_at_v4_evaluation": true
+  },
+  "clone_ready_distribution_check": {
+    "dependency_imports": "PASS",
+    "enhanced_system_import": "PASS",
+    "install_smoke_route": ["data-analyst", "machine-learning"],
+    "install_smoke_verification": "PASS",
+    "v4_regression_recheck": "tests 1-7 PASS; notebook E2E exceeded this sandbox command window during combined rerun; frozen V4 evidence records isolated PASS"
+  },
+  "runtime_notes": {
+    "embedding_faiss_backend": "implemented but not runtime-verified in this sandbox",
+    "default_offline_rag_fallback": "BM25 + char-TFIDF vector similarity",
+    "production_status": "Pre-Production / Expert Copilot"
+  }
+}
