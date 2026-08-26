@@ -133,11 +133,25 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
+설치 후 현재 환경을 확인하려면:
+
+```cmd
+.venv\Scripts\python.exe verify_install.py
+```
+
+예제 CSV는 Repository에서 생성합니다.
+
+```cmd
+.venv\Scripts\python.exe examples\generate_demo_data.py
+```
+
 선택적으로 Embedding + FAISS RAG:
 
 ```cmd
 setup_rag_embeddings_windows.bat
 ```
+
+자세한 설치 절차: [`docs/INSTALL_KO.md`](docs/INSTALL_KO.md)
 
 ### 2. Codex 실행
 
@@ -170,6 +184,8 @@ Repository Skill:
 ```
 
 ### 3. Harness 직접 실행
+
+먼저 `examples\generate_demo_data.py`를 실행한 뒤:
 
 ```cmd
 python .agents\skills\ai-data-expert\scripts\run_expert.py ^
@@ -223,6 +239,7 @@ RAG의 역할은 단순 참고문 출력이 아닙니다. 구조화된 근거가
 
 ## 문서
 
+- [설치 가이드](docs/INSTALL_KO.md)
 - [사용 설명서](docs/USAGE_KO.md)
 - [아키텍처](docs/ARCHITECTURE_KO.md)
 - [개발 기록](docs/DEVELOPMENT_LOG_KO.md)
