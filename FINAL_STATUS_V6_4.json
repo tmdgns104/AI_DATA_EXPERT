@@ -1,0 +1,15 @@
+{
+  "version": "V6.4_FROZEN",
+  "status": "FROZEN_HISTORICAL_BASELINE",
+  "regression": "54/54 PASS",
+  "independent_holdout": "80/200 = 40.0%",
+  "strengths": [
+    "RAG domain-negation behavior",
+    "stratified plus group sensitivity"
+  ],
+  "failures_forwarded_to_v6_5": [
+    "unseen semantic group aliases",
+    "cadence breaks while timestamps remain monotonic",
+    "direct/affine post-outcome target proxies"
+  ]
+}

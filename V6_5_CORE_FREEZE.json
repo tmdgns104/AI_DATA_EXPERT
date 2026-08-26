@@ -1,0 +1,27 @@
+{
+  "version": "V6.5_FROZEN_CANDIDATE",
+  "status": "CORE_FROZEN",
+  "regression_evidence": {
+    "passed": 58,
+    "total": 58
+  },
+  "freeze_policy": "Analytical core was frozen before the new disjoint Kaggle-40 direct model-execution benchmark. Benchmark results do not authorize rewriting the frozen core.",
+  "core_changes": [
+    "generalized repeated-entity alias inference",
+    "timestamp cadence-break detection",
+    "direct and affine target leakage proxy detection",
+    "compound temporal/group validation",
+    "baseline-inclusive champion selection",
+    "RAG negation and relevance safeguards"
+  ],
+  "distribution_hardening_after_core_freeze": [
+    "human-friendly notebook output contract",
+    "dataset-specific RNN notebook renderer improvements",
+    "default enhanced_system entrypoint points to V6.5"
+  ],
+  "not_claimed": [
+    "production release",
+    "original Kaggle train/test coverage",
+    "Kaggle leaderboard score"
+  ]
+}

@@ -1,0 +1,6 @@
+category,executed,beats_baseline
+regression,10,6
+classification,10,9
+timeseries,10,9
+vision,10,10
+TOTAL,40,34

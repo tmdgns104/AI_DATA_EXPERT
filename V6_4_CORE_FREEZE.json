@@ -1,0 +1,14 @@
+{
+  "version": "V6.4_FROZEN",
+  "status": "FROZEN_HISTORICAL_BASELINE",
+  "regression_evidence": {
+    "passed": 54,
+    "total": 54
+  },
+  "independent_holdout": {
+    "passed": 80,
+    "total": 200,
+    "rate": 0.4
+  },
+  "policy": "Core was not changed after the independent 200-case holdout. Failures became V6.5 work items."
+}

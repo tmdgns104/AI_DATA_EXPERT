@@ -1,0 +1,15 @@
+{
+  "version": "V6.5_FROZEN_CANDIDATE",
+  "benchmark": "NEW_KAGGLE_40_DIRECT_REALDATA_SOLVE_V2",
+  "original_kaggle_data_coverage": "0/40",
+  "direct_model_execution": "40/40",
+  "failed": 0,
+  "selected_model_beats_baseline": "34/40",
+  "by_category": {
+    "regression": {"executed": 10, "beats_baseline": 6},
+    "classification": {"executed": 10, "beats_baseline": 9},
+    "timeseries": {"executed": 10, "beats_baseline": 9},
+    "vision": {"executed": 10, "beats_baseline": 10}
+  },
+  "honesty_note": "These are not original Kaggle train/test files and are not leaderboard scores. They are direct model executions on offline real datasets matched to 40 new Kaggle competition specifications."
+}

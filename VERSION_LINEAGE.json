@@ -1,6 +1,6 @@
 {
-  "current": "V6.1_CANDIDATE",
-  "status": "CANDIDATE_NOT_PROMOTED",
+  "current": "V6.5_FROZEN_CANDIDATE",
+  "status": "FROZEN_CANDIDATE_NOT_PRODUCTION",
   "lineage": [
     "S0 no-agent notebook baseline",
     "Data Expert V2/V3",
@@ -13,42 +13,25 @@
     "Codex Skill V4",
     "Codex Skill V5 Candidate",
     "Codex Skill V6 Rejected after regression",
-    "Codex Skill V6.1 Candidate"
+    "Codex Skill V6.1",
+    "Codex Skill V6.2",
+    "Codex Skill V6.3",
+    "Codex Skill V6.4 Frozen",
+    "Codex Skill V6.5 Frozen Candidate"
   ],
-  "v4_changes": [
-    "partial-label target semantics",
-    "identifier and row-order proxy guard",
-    "entity/run/time split inference",
-    "hybrid Domain RAG",
-    "structured fact injection",
-    "semantic notebook validation"
+  "v6_5_changes": [
+    "unseen semantic group alias inference",
+    "cadence-break detection",
+    "direct/affine target leakage detection",
+    "baseline-inclusive champion selection",
+    "human-friendly notebook reasoning/output contract",
+    "new disjoint Kaggle 40 direct model-execution benchmark"
   ],
-  "v5_changes": [
-    "Shared Evidence Store",
-    "Argument Ledger",
-    "time-series specialist",
-    "chronological validation",
-    "persistence baseline",
-    "RNN/LSTM execution and modality verifier"
-  ],
-  "v6_changes": [
-    "CompetitionSpec",
-    "Competition Planner",
-    "Competition Verifier",
-    "competition metric/submission contract",
-    "Human-friendly Renderer",
-    "Kaggle MASTER_EVAL harness"
-  ],
-  "v6_1_changes": [
-    "forecast negation regression repair",
-    "explicit forecast horizon regression repair"
-  ],
-  "release_note": "V6 was not promoted because inherited regression failures were found. V6.1 was frozen only after the full recorded regression set passed.",
+  "release_note": "V6.5 core frozen before the new 40 benchmark. Output-style/distribution hardening is tracked separately from analytical core freeze.",
   "next_priorities": [
-    "composite time+group validation",
-    "exact competition metric adapters",
-    "stronger rolling-origin time-series evaluation",
-    "real Kaggle/MLE-bench execution",
-    "harder vision shift/leakage evaluation"
+    "original Kaggle data execution when credentials are available",
+    "rolling/multi-seed robustness for time-series",
+    "stronger semantic group inference calibration",
+    "harder real-world vision shift evaluation"
   ]
 }

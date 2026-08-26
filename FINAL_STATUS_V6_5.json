@@ -1,0 +1,29 @@
+{
+  "version": "V6.5_FROZEN_CANDIDATE",
+  "status": "FROZEN_CANDIDATE_NOT_PRODUCTION",
+  "core_regression": {
+    "passed": 58,
+    "total": 58
+  },
+  "output_style_regression": {
+    "passed": 2,
+    "total": 2
+  },
+  "install_smoke": "PASS",
+  "new_kaggle_40": {
+    "problem_specs": 40,
+    "direct_model_execution": 40,
+    "execution_failures": 0,
+    "selected_model_beats_baseline": 34,
+    "original_kaggle_dataset_coverage": 0,
+    "leaderboard_claim": false
+  },
+  "latest_notebook_validation": {
+    "cells": 31,
+    "error_outputs": 0,
+    "selected_by_validation": "LSTM",
+    "test_rmse": 10.5320,
+    "persistence_rmse_gain_pct": 9.32,
+    "simple_rnn_vs_lstm_rmse_gap_pct": 1.55
+  }
+}

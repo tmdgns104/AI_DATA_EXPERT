@@ -3,19 +3,19 @@ name: ai-data-expert
 description: Use for CSV/data analysis, EDA, statistics, machine learning, deep learning, computer vision, time-series, competition-aware modeling, big-data, MLOps, causal questions, or Jupyter notebook tasks that need evidence-backed expert judgment and executable validation.
 ---
 
-# AI Data Expert V6.1 Candidate
+# AI Data Expert V6.5 Frozen Candidate
 
 Use this skill whenever the task is primarily data/AI analysis or a Jupyter data-science assignment.
 
 ## Principle
 
-Do not begin with a model. The active V6.1 path is:
+Do not begin with a model or a label. The active path is:
 
-`TaskSpec/DataGuard -> Hybrid Domain RAG -> Intent/Modality Router -> Experts -> Shared Evidence/Argument Ledger -> Hypothesis/Experiment -> Challenger -> Modality/Competition Verifier -> Human Output`
+`Observe -> TaskSpec/Data Guard -> Domain RAG -> Intent/Modality -> Experts -> Shared Evidence/Argument -> Experiment -> Challenger -> Verifier -> Human-friendly Output`
 
-A result that merely executes is not sufficient. Preserve uncertainty and return `REVIEW`/`FAIL` when required context is missing.
+Execution alone is not enough. Preserve uncertainty internally, but render the final notebook in simple human language.
 
-## 1. Inspect the request and local inputs
+## 1. Inspect before deciding
 
 For notebooks:
 
@@ -23,25 +23,15 @@ For notebooks:
 python .agents/skills/ai-data-expert/scripts/inspect_notebook.py <question.ipynb>
 ```
 
-Identify or infer:
-- observation unit
-- target
-- target business meaning
-- prediction time
-- features available at prediction time
-- entity/group id
-- timestamp
-- problem type
-- validation split
-- primary metric
-- business error cost
-- predictive vs causal question
-- deployment constraints
-- if competition task: exact competition metric, direction, validation contract, and submission format
+Identify observation unit, target, prediction time, available features, group/entity structure, timestamp, metric, validation requirement, business cost, deployment constraints, and competition contract when relevant.
 
-Unknown fields must remain `UNKNOWN`; do not silently invent them.
+Unknown fields stay unknown. Do not silently invent them.
 
-## 2. Run the active expert harness before authoring
+For data analysis, prefer this visible reasoning order:
+
+`데이터 확인 -> 이상/구조 발견 -> 근거 확인 -> 문제 유형 판단 -> 검증 방법 선택 -> baseline -> model -> Test 해석`
+
+## 2. Run the expert harness
 
 ```bash
 python .agents/skills/ai-data-expert/scripts/run_expert.py \
@@ -51,158 +41,79 @@ python .agents/skills/ai-data-expert/scripts/run_expert.py \
   --out outputs/expert_context.json
 ```
 
-Useful optional flags:
-- `--prediction-time "..."`
-- `--business-cost "..."`
-- `--domain-path <folder-or-file>`
-- `--modality time-series`
-- `--timestamp-col <column>`
-- `--horizon <horizon>`
-- `--monitoring --existing-model`
-- `--deployment`
-- `--streaming --size-gb <GB>`
-- `--image-npz <images.npz>` for actual pixel CNN simulation/training
+Useful flags include `--prediction-time`, `--business-cost`, `--domain-path`, `--modality time-series`, `--timestamp-col`, `--horizon`, `--monitoring`, `--deployment`, `--streaming`, and `--image-npz`.
 
-Read these blocks before writing the final answer:
-- `task_spec`
-- `data_guard`
-- `domain_context`
-- `routing`
-- expert `DECIDE/RISKS/CONFIDENCE`
-- `shared_evidence`
-- `argument_ledger`
-- `hypotheses`
-- `experiment_evidence`
-- `challenger`
-- `verification`
+Internally inspect `task_spec`, `data_guard`, `domain_context`, `routing`, `shared_evidence`, `argument_ledger`, `challenger`, and `verification`. Never promote a real `FAIL`.
 
-Never promote a `FAIL`. Surface `REVIEW` caveats.
+## 3. Mandatory guards
 
-## 3. Mandatory data/validation guards
+- Target-missing rows are unlabeled rows, not a new class.
+- Detect unique/monotonic IDs, direct target copies, affine target proxies, and post-outcome features.
+- Repeated entities can invalidate random-row validation, including unfamiliar aliases such as account/crew/family/merchant/cohort/unit/ref/token patterns.
+- Time validation must inspect not only order/duplicates but cadence breaks.
+- Group and Time can both matter; use combined sensitivity/temporal-group validation when appropriate.
+- Final Test cannot select model, features, threshold, lag, sequence length, or hyperparameters.
+- Baselines compete in Validation. A complex model is not champion merely because it is complex.
+- Under imbalance, accuracy alone is insufficient.
+- Predictive feature importance is not causal evidence.
 
-- Target-missing rows are unlabeled rows, not a new target class.
-- Exclude obvious ID, serial, UUID, and near-monotonic row-order proxies unless evidence justifies them.
-- Observation unit comes before split choice.
-- Repeated entities can invalidate random-row split.
-- Time structure can invalidate shuffled validation.
-- Group and Time may both matter. Do not blindly let one precedence rule override the other.
-- Final Test cannot be used for model, feature, threshold, or hyperparameter selection.
-- Complex models must beat defensible simple baselines before claiming improvement.
-- Under imbalance, accuracy alone is insufficient; include macro/balanced/per-class or event-focused metrics as appropriate.
-- Failure analysis must inspect worst rows/classes/segments, not only global averages.
-- Predictive feature importance is not a causal effect.
+## 4. EDA must change the next decision
 
-## 4. Notebook tasks
+EDA is not decoration. Observations should lead to a decision or an experiment.
 
-For ordinary tabular regression/classification:
+Examples:
+- strong lag-1 correlation -> persistence baseline is required
+- strong lag-96 correlation on 15-minute data -> daily seasonal baseline/input-window sensitivity is worth checking
+- repeated entity rows -> group-aware validation
+- timestamp gaps -> cadence integrity review
+- minority support is tiny -> threshold/recall stability cannot be claimed from one split
 
-```bash
-python .agents/skills/ai-data-expert/scripts/solve_notebook.py \
-  --input <question.ipynb> \
-  --data <data.csv> \
-  --output <answer.ipynb>
-```
+If an input length such as 32 steps is not given by the assignment, write that it is an experiment condition. If practical, compare a small set of candidate lengths on Validation rather than calling one value optimal.
 
-Preserve original question cells. Use Train/Validation/Test correctly and run semantic validation.
+## 5. Validation selects; Test reports
 
-```bash
-python .agents/skills/ai-data-expert/scripts/validate_notebook.py <answer.ipynb>
-```
+Use Validation to choose the model/threshold/checkpoint/feature set/sequence length. Open final Test after selection.
 
-## 5. Time-Series V5/V6.1 contract
+The final explanation should center on Test results while mentioning that the choice was made on Validation.
 
-For time-series analysis:
-- parse timestamp and inspect duplicates/order/dominant interval
-- use chronological or rolling-origin validation for forecast tasks
-- fit scaling/preprocessing on Train only
-- compare against persistence/naive and preferably seasonal-naive baselines
-- select model/checkpoint on Validation, then open final Test once
-- record assumptions in Shared Evidence and Argument Ledger
+When metrics disagree, report the disagreement. Do not write “best on every metric” unless that is actually true.
 
-Explicit forecast negation must be respected:
+## 6. Fair model comparison
 
-```text
-historical time-series analysis only; do not forecast
-```
+Keep data, split, preprocessing and training budget comparable where possible, but do not imply equal model complexity merely because hidden size is the same. Parameter count/resource differences may be noted when they matter.
 
-must not trigger forecast-only requirements.
+## 7. Time-series
 
-Explicit horizon must be preserved:
+- inspect timestamp parsing, order, duplicates, dominant cadence and cadence breaks
+- use chronological/rolling validation for forecasting
+- fit preprocessing on Train only
+- compare persistence and meaningful seasonal-naive baselines
+- explicit `do not forecast` suppresses forecast-only requirements
+- explicit horizons such as `next 24 hours` must not become UNKNOWN
+- for the Steel Industry exercise, an unspecified one-step/sequence length is an explicit exercise assumption, not a discovered optimum
 
-```text
-forecast the next 24 hours
-horizon=24h
-```
+`solve_timeseries_rnn_v5.py` remains a dataset-specific exercise solver, not a universal forecasting engine.
 
-must not be downgraded to `UNKNOWN`.
+## 8. Competition-aware tasks
 
-`solve_timeseries_rnn_v5.py` is currently a dataset-specific notebook solver for the included Steel Industry exercise. Do not present it as a universal forecasting solver.
+Preserve target, official metric, direction, validation logic and submission contract. Generic local metrics may supplement but cannot replace the official metric.
 
-## 6. Competition-aware tasks
+If exact scoring needs unavailable hierarchy/weights/private artifacts, mark the reproduction approximate rather than pretending it is the leaderboard score.
 
-V6 adds CompetitionSpec/Planner/Verifier behavior.
+## 9. Domain RAG
 
-Before modeling, fix:
-- competition target
-- official selection metric
-- metric direction
-- validation expectation
-- leakage risks
-- submission mode
+Retrieved material is evidence, not truth. Keep provenance, reject target/domain mismatches, and respect domain negation such as `not manufacturing`, `제조와 무관`, or requests to exclude factory context.
 
-Generic local metrics may be diagnostic only. They cannot replace the competition metric.
+## 10. Human-friendly Notebook output
 
-If exact competition scoring requires unavailable artifacts such as hierarchy, scale weights, quantile weights, or private evaluation logic, mark runtime as approximate and keep the result at `REVIEW` rather than pretending exact reproduction.
+Follow `.agents/skills/ai-data-expert/OUTPUT_STYLE_CONTRACT_KO.md`.
 
-The included 40-competition MASTER_EVAL is an internal proxy benchmark. It is not a Kaggle leaderboard result.
+Internal reasoning may use Argument Ledger, Evidence IDs and Verifier states. The final notebook should normally not show those terms. Prefer short, natural explanations such as `확인해봄`, `정했음`, `비교했음` when that matches the user's requested style.
 
-## 7. Hybrid Domain RAG
+## 11. Version discipline
 
-Place project/domain evidence in `domain_knowledge/` or pass `--domain-path`.
-
-Retrieval combines lexical/vector/metadata signals. Structured facts can refine prediction time, group id, feature eligibility, and business cost only when source-traced evidence supports them.
-
-Retrieved material is evidence, not universal truth. Conflicting or weak evidence must reduce confidence.
-
-## 8. Argument Ledger / Challenger
-
-Major decisions should be expressible as:
-
-`Question -> competing hypotheses -> required evidence -> observation -> counterargument -> decision -> status -> next question`
-
-Useful statuses:
-- `OPEN`
-- `SUPPORTED`
-- `REJECTED`
-- `INCONCLUSIVE`
-- `BLOCKED`
-
-`SUPPORTED` means survived current evidence, not proven forever.
-
-The Challenger should attempt to falsify:
-- leakage/proxy?
-- wrong split?
-- baseline missing?
-- test reused?
-- minority/segment failure hidden?
-- probability/threshold unstable?
-- causal overclaim?
-- forecast horizon invented?
-- competition metric replaced?
-- domain evidence contradicted?
-
-## 9. Runtime status
-
-- `PASS`: no critical contract violation found in current evidence
-- `REVIEW`: analysis can proceed but material uncertainty/assumption remains
-- `FAIL`: execution or contract violation blocks promotion
-
-`REVIEW` is a valid output and must not be cosmetically upgraded.
-
-## 10. Version discipline
-
-- Historical V3/V4/V5/V6 freezes are provenance and must not be rewritten.
-- V6 was not promoted because inherited regression failures were discovered after its first benchmark run.
-- V6.1 repaired forecast negation and explicit horizon handling, then was frozen after the recorded 44/44 regression pass.
-- Current main baseline is `V6.1_CANDIDATE`, not Production Release.
-- New evaluation failures belong to the next version; do not mutate frozen evidence to improve the score.
+- Historical freezes are provenance; never rewrite them to improve a score.
+- V6.4 was frozen before its independent 200-case holdout and scored 80/200 on that harder holdout.
+- V6.5 fixes the resulting blind spots: unseen group aliases, cadence breaks, direct/affine target leakage, plus V6.4 RAG negation behavior.
+- V6.5 must be frozen before interpreting new benchmark outcomes.
+- Kaggle fallback-data experiments are not Kaggle leaderboard scores and must be labeled honestly.

@@ -1,0 +1,5 @@
+{
+  "version": "V6.2_FROZEN_CANDIDATE",
+  "status": "HISTORICAL_FREEZE",
+  "note": "Preserved historical freeze before later V6.3/V6.4/V6.5 generalization work. V6.2 added compound validation, stricter RAG evidence gating, baseline-inclusive time-series champion selection, adaptive next experiments, and competition metric adapters."
+}

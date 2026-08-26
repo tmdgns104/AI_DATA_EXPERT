@@ -1,0 +1,27 @@
+{
+  "version": "V6.5_FROZEN_CANDIDATE",
+  "release_type": "frozen candidate",
+  "default_entrypoint": "data_expert/enhanced_system.py -> V65System",
+  "required_paths": [
+    ".agents/skills/ai-data-expert/SKILL.md",
+    ".agents/skills/ai-data-expert/OUTPUT_STYLE_CONTRACT_KO.md",
+    "data_expert/v6_5_system.py",
+    "data_expert/data_guard_v65.py",
+    "data_expert/competition_planner_v65.py",
+    "data_expert/output_renderer_v65.py",
+    "V6_5_CORE_FREEZE.json",
+    "FINAL_STATUS_V6_5.json",
+    "TEST_STATUS_V6_5.json"
+  ],
+  "verification": [
+    "58/58 analytical regression PASS",
+    "2/2 output-style regression PASS",
+    "verify_install PASS",
+    "40/40 new competition-spec direct model execution"
+  ],
+  "not_claimed": [
+    "Production Release",
+    "Kaggle original-data coverage",
+    "Kaggle leaderboard ranking"
+  ]
+}

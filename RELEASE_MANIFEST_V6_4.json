@@ -1,0 +1,9 @@
+{
+  "version": "V6.4_FROZEN",
+  "release_type": "historical frozen candidate",
+  "not_claimed": [
+    "production readiness",
+    "Kaggle leaderboard performance"
+  ],
+  "next": "V6.5 addresses V6.4 holdout blind spots without rewriting V6.4 evidence."
+}

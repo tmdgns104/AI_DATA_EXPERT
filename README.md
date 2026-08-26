@@ -2,257 +2,100 @@
 
 **Codex에서 데이터 분석·ML/DL·Vision·Time-Series 작업을 더 안전하게 수행하기 위한 검증형 Repository Skill + Expert Harness**
 
-- 최신 기준: **V6.1 Candidate**
-- 상태: **Candidate / Pre-Production Expert Copilot**
-- Core regression: **44/44 PASS at freeze time**
-- Kaggle MASTER_EVAL V1 (proxy): **3835/4000 = 95.875**
-- MASTER_EVAL status: **35 PASS / 5 REVIEW / 0 FAIL**
-- 실제 Kaggle 원본 데이터 평가: **0/40** — Kaggle API 자격증명/원본 데이터가 필요함
+- 최신 기준: **V6.5 Frozen Candidate**
+- 상태: **Frozen Candidate / Pre-Production Expert Copilot**
+- 분석 코어 회귀: **58/58 PASS**
+- Notebook 출력 스타일 회귀: **2/2 PASS**
+- 설치 smoke: **PASS**
+- 새로운 Kaggle 문제 명세 40개: **40/40 실제 모델 실행**
+- 그중 baseline 상회: **34/40**
+- 실제 Kaggle 원본 데이터 coverage: **0/40** — leaderboard 점수 아님
 
-> 이 프로젝트의 목표는 높은 점수를 만드는 AutoML이 아니라, **잘못된 문제 정의·누수·부적절한 검증·과장된 결론을 먼저 의심하고 증거로 판단하는 데이터 분석 Agent**를 만드는 것입니다.
+> 목표는 점수를 무조건 높이는 AutoML이 아니라, **문제 정의·누수·검증·근거·결론을 의심하고 사람이 이해하기 쉬운 결과로 정리하는 Data Expert**를 만드는 것입니다.
 
-## V6.1 핵심 흐름
+## 현재 흐름
 
 ```text
-User / CSV / Notebook / Competition Task
-        ↓
-TaskSpec V6.1
-        ↓
-Data Guard
-        ↓
-Hybrid Domain RAG
-        ↓
-Intent / Modality Router
-        ↓
-Data / ML / DL / Vision / Time-Series / BigData / MLOps Experts
-        ↓
-Shared Evidence + Argument Ledger
-        ↓
-Hypothesis / Experiment
-        ↓
-Local Challenger
-        ↓
-Modality Verifier
-        ↓
-CompetitionSpec / Competition Planner / Metric Guard (V6)
-        ↓
-Human-friendly Output
-        ↓
-PASS / REVIEW / FAIL
+데이터/문제 확인
+  ↓
+TaskSpec + Data/Leakage Guard
+  ↓
+Domain RAG
+  ↓
+Intent / Modality / Competition Planning
+  ↓
+Experts + Shared Evidence + Argument
+  ↓
+Experiment / Baseline / Validation
+  ↓
+Challenger + Verifier
+  ↓
+Final Test
+  ↓
+Human-friendly Notebook / Report
 ```
 
-## V4 → V6.1 주요 변화
+## V6.5 핵심 개선
 
-### V4 — 데이터 안전 + Hybrid RAG
-- Target missing을 새로운 Class로 만들지 않고 labeled / unlabeled 분리
-- `_id`, unique serial, row-order proxy 등 식별자/순서 누수 경고 및 제외
-- 반복 Entity / Run / Time 구조 탐지와 split 후보 추론
-- Final Test를 모델/Threshold 선택에서 격리
-- BM25 + Vector + Metadata + Structured Facts 기반 Hybrid Domain RAG
-- Domain fact를 prediction time / group / feature eligibility / business cost에 적용
-- Semantic Notebook Validator
+- 처음 보는 `crew_ref`, `family_bundle`, `merchant_cohort` 같은 반복 Entity 후보 일반화
+- timestamp가 증가하더라도 중간 간격이 깨지는 cadence break 탐지
+- `target` 직접 복사 및 affine target proxy leakage 탐지
+- Persistence/SeasonalNaive를 포함한 baseline-inclusive Champion 선택
+- 내부 분석은 엄격하게 유지하면서 최종 Notebook은 자연스러운 한국어로 단순화
+- `데이터 확인 → 이상 발견 → 근거 확인 → 판단 → 분석` 흐름을 출력 규칙으로 고정
+- 32-step/threshold/lag처럼 과제가 정하지 않은 값은 가정으로 표현
+- Validation은 선택, Test는 최종 보고에 사용
+- MAE/RMSE/R²가 엇갈리면 그대로 해석
+- RNN/LSTM의 parameter count가 다르면 구조 자체의 절대 우위로 과장하지 않음
 
-### V5 — 논증형 분석 + Time-Series specialist
-- Shared Evidence Store
-- Argument Ledger
-- 질문 → 가설 → 증거 → 반증 → 임시결론 → 다음 질문 구조
-- Time-Series 전용 routing / verifier
-- timestamp integrity, chronological split, train-only scaling
-- Persistence baseline + SimpleRNN/LSTM 비교
-- 명시되지 않은 forecast horizon은 가정으로 숨기지 않고 REVIEW
+Notebook 출력 기준: [OUTPUT_STYLE_CONTRACT_KO.md](.agents/skills/ai-data-expert/OUTPUT_STYLE_CONTRACT_KO.md)
 
-### V6 — Competition-aware planning
-- CompetitionSpec
-- Competition metric / direction / validation / submission contract
-- Competition Planner
-- Competition Verifier
-- generic metric이 대회 metric을 덮어쓰지 못하도록 guard
-- probability / class label / continuous submission mode 구분
-- complex metric은 원본 competition artifact가 없으면 APPROX/REVIEW로 남김
+## 새로운 Kaggle 40문제 평가
 
-### V6.1 — 회귀 수정
-V6 Freeze 후 기존 회귀에서 2개 문제를 발견해 V6을 Release하지 않았습니다.
+기존 MASTER_EVAL의 40문제를 재사용하지 않고 새로운 문제 명세를 40개 구성했습니다.
 
-- `do not forecast` 같은 명시적 forecast negation 처리 수정
-- `next 24 hours`, `horizon=24h` 같은 explicit horizon을 UNKNOWN으로 떨어뜨리던 문제 수정
+| 유형 | 실행 | Baseline 상회 |
+|---|---:|---:|
+| 회귀 | 10/10 | 6/10 |
+| 분류 | 10/10 | 9/10 |
+| 시계열 | 10/10 | 9/10 |
+| Vision | 10/10 | 10/10 |
+| **전체** | **40/40** | **34/40** |
 
-수정 후 전체 회귀를 다시 통과한 상태에서 V6.1 Core를 Freeze했습니다.
+중요: Kaggle 자격증명이 없어 **원본 competition train/test 데이터는 0/40**입니다. 각 문제 명세에 대해 modality가 맞는 실제 오프라인 데이터로 모델 학습/검증/Test를 직접 실행한 결과이며 **Kaggle leaderboard 점수가 아닙니다.**
 
-## 검증 현황
-
-| 검증 | 결과 |
-|---|---:|
-| inherited V3 regression | **22/22 PASS** |
-| V4 improvement | **8/8 PASS** |
-| V5 time-series | **7/7 PASS** |
-| V6 competition | **5/5 PASS** |
-| V6.1 regression | **2/2 PASS** |
-| Freeze integrity | **PASS** |
-| Kaggle MASTER_EVAL V1 proxy | **95.875** |
-| MASTER_EVAL status | **35 PASS / 5 REVIEW / 0 FAIL** |
-
-`95.875`는 실제 Kaggle leaderboard 점수가 아닙니다. 40개 Kaggle competition의 문제/metric/validation 성격을 기준으로 만든 **내부 proxy benchmark**입니다. 실제 Kaggle 원본 데이터 coverage는 현재 `0/40`입니다.
-
-상세 결과:
-- [`KAGGLE_MASTER_EVAL_V6_1_REPORT_KO.md`](KAGGLE_MASTER_EVAL_V6_1_REPORT_KO.md)
-- [`KPI_V6_1.json`](KPI_V6_1.json)
-- [`FINAL_STATUS_V6_1.json`](FINAL_STATUS_V6_1.json)
-- [`V6_1_CORE_FREEZE.json`](V6_1_CORE_FREEZE.json)
-
-## 현재 확인된 약점
-
-V6.1은 아래 문제를 숨기지 않고 다음 버전 개선 대상으로 남겨둡니다.
-
-1. **Time + Group 복합 Validation 부족**
-   - Bike Sharing / IEEE Fraud 같은 문제에서 group-aware와 temporal validation을 함께 고려해야 함
-2. **Competition 고유 metric adapter 부족**
-   - M5 WRMSSE
-   - COVID Week 5 weighted pinball
-3. **Time-Series 일반 후보 모델 경쟁력 부족**
-   - proxy 10/10에서 Persistence baseline을 이기지 못함
-4. **Vision proxy 난이도 부족**
-   - 현재 100점은 실제 Kaggle Vision 일반화 성능을 의미하지 않음
-5. **실제 Kaggle/MLE-bench 실행 미완료**
-   - 실제 competition data / leaderboard evaluation 필요
+상세: [KAGGLE_NEW40_REALDATA_V6_5_REPORT_KO.md](KAGGLE_NEW40_REALDATA_V6_5_REPORT_KO.md)
 
 ## 빠른 시작
 
-### 1. 설치
-
-Windows:
-
 ```cmd
+git clone https://github.com/tmdgns104/AI_DATA_EXPERT.git
+cd AI_DATA_EXPERT
 setup_windows.bat
-```
-
-직접 설치:
-
-```cmd
-python -m venv .venv
-.venv\Scripts\activate
-python -m pip install -r requirements.txt
-```
-
-설치 후 현재 환경을 확인하려면:
-
-```cmd
-.venv\Scripts\python.exe verify_install.py
-```
-
-예제 CSV는 Repository에서 생성합니다.
-
-```cmd
-.venv\Scripts\python.exe examples\generate_demo_data.py
-```
-
-선택적으로 Embedding + FAISS RAG:
-
-```cmd
-setup_rag_embeddings_windows.bat
-```
-
-자세한 설치 절차: [`docs/INSTALL_KO.md`](docs/INSTALL_KO.md)
-
-### 2. Codex 실행
-
-Repository 루트에서:
-
-```cmd
+python examples\generate_demo_data.py
 codex
 ```
 
-예:
-
-```text
-이 CSV를 분석해줘.
-Target 의미, 데이터 누수, 적절한 split, baseline, 실패 segment,
-최종 운영 판단까지 검토해줘.
-```
-
-Notebook 과제:
-
-```text
-examples/DNN_regression_question.ipynb 문제를 풀어서
-outputs/answer.ipynb로 만들어줘.
-데이터는 examples/4_manufacturing_yield.csv를 사용해.
-```
-
-Repository Skill:
-
-```text
-.agents/skills/ai-data-expert/SKILL.md
-```
-
-### 3. Harness 직접 실행
-
-먼저 `examples\generate_demo_data.py`를 실행한 뒤:
+Codex 없이 smoke 확인:
 
 ```cmd
-python .agents\skills\ai-data-expert\scripts\run_expert.py ^
-  --csv examples\4_manufacturing_yield.csv ^
-  --task "수율을 예측하고 누수, split, baseline, 운영 위험을 검토" ^
-  --target yield_percentage ^
-  --prediction-time "before process completion" ^
-  --out outputs\expert_context.json
+python verify_install.py
 ```
 
-Time-Series의 경우 timestamp/horizon을 명시할 수 있습니다.
+## 핵심 상태 파일
 
-```cmd
-python .agents\skills\ai-data-expert\scripts\run_expert.py ^
-  --csv series.csv ^
-  --task "forecast the next 24 hours" ^
-  --target target ^
-  --modality time-series ^
-  --timestamp-col timestamp ^
-  --horizon 24h ^
-  --out outputs\forecast_context.json
-```
+- `V6_5_CORE_FREEZE.json` — 분석 코어 Freeze
+- `FINAL_STATUS_V6_5.json` — 현재 상태
+- `TEST_STATUS_V6_5.json` — 테스트 증거
+- `RELEASE_MANIFEST_V6_5.json` — 배포 Manifest
+- `evaluation/kaggle_master_eval/new40_v65/NEW40_REALDATA_RESULTS_V65_V2.json` — 새 40문제 전체 결과
+- `.agents/skills/ai-data-expert/SKILL.md` — Codex Skill
 
-> `solve_timeseries_rnn_v5.py`는 현재 포함된 Steel Industry 연습 데이터 구조에 맞춘 전용 notebook solver입니다. 범용 시계열 solver로 과장하지 않습니다.
+## 현재 한계
 
-## Domain RAG
+- 실제 Kaggle 원본 데이터/leaderboard 검증은 아직 없음
+- 시계열은 rolling/multi-seed 안정성을 더 강화할 여지가 있음
+- 의미 기반 group inference는 앞으로 처음 보는 명명 규칙에서 계속 검증 필요
+- Vision 실제 카메라/배경/장비 shift 평가는 더 어려운 실데이터가 필요
 
-`domain_knowledge/`에 조직/공정 근거를 넣거나 `--domain-path`로 추가합니다.
-
-권장 자료:
-
-```text
-data_dictionary.md
-process_flow.md
-sensor_spec.md
-quality_standard.md
-defect_definition.md
-incident_history.md
-operational_constraints.json
-```
-
-RAG의 역할은 단순 참고문 출력이 아닙니다. 구조화된 근거가 있으면 TaskSpec의 prediction time, group id, 사용 불가능 feature, business cost 판단을 바꿀 수 있습니다.
-
-## 상태 의미
-
-- **PASS**: 현재 evidence/verification contract에서 치명적 위반을 발견하지 못함
-- **REVIEW**: 분석은 가능하지만 중요한 불확실성·가정·데이터 부족이 남음
-- **FAIL**: leakage, 실행 실패, contract 위반 등으로 결과 승격 금지
-
-`REVIEW`는 실패가 아니라, 모르는 것을 PASS로 포장하지 않기 위한 정상 상태입니다.
-
-## 문서
-
-- [설치 가이드](docs/INSTALL_KO.md)
-- [사용 설명서](docs/USAGE_KO.md)
-- [아키텍처](docs/ARCHITECTURE_KO.md)
-- [개발 기록](docs/DEVELOPMENT_LOG_KO.md)
-- [연구 일지](docs/RESEARCH_LOG_KO.md)
-- [실사용 검증](docs/REAL_VALIDATION_KO.md)
-- [V4 Hybrid RAG 보고서](V4_HYBRID_RAG_AND_USAGE_REPORT_KO.md)
-- [V5 RNN Simulation 보고서](V5_RNN_SIMULATION_REPORT_KO.md)
-- [V6.1 Kaggle MASTER_EVAL 보고서](KAGGLE_MASTER_EVAL_V6_1_REPORT_KO.md)
-
-## Release 정책
-
-- 과거 Freeze 파일과 실패 증거를 덮어쓰지 않습니다.
-- V6은 회귀 실패가 발견되어 Release 기준선으로 승격하지 않았습니다.
-- 현재 `main` 기준 최신 코드는 **V6.1 Candidate**입니다.
-- V6.1도 아직 Production Release가 아닙니다.
-- 다음 개선은 V6.1 Freeze를 보존한 채 새 버전에서 진행합니다.
+과거 Freeze와 실패 기록은 덮어쓰지 않고 provenance로 보존합니다.

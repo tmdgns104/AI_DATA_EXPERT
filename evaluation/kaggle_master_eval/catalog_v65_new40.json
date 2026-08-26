@@ -1,0 +1,7 @@
+{
+  "benchmark": "NEW_KAGGLE_40_V65",
+  "design": "40 new competition specifications disjoint from the earlier catalog_v1; 10 regression, 10 classification, 10 timeseries, 10 vision",
+  "counts": {"regression": 10, "classification": 10, "timeseries": 10, "vision": 10},
+  "original_kaggle_data_coverage": 0,
+  "note": "Competition specifications are used as task contracts. Offline real datasets matched by modality are used for direct model execution when Kaggle original data is unavailable."
+}

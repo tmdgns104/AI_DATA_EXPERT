@@ -1,0 +1,12 @@
+{
+  "version": "V6.5_FROZEN_CANDIDATE",
+  "tests": {
+    "analytical_regression": "58/58 PASS",
+    "notebook_output_style": "2/2 PASS",
+    "verify_install": "PASS",
+    "new40_direct_model_execution": "40/40",
+    "new40_baseline_beaten": "34/40",
+    "original_kaggle_data": "0/40"
+  },
+  "important_interpretation": "The New40 result is an offline direct model-execution benchmark mapped to 40 new Kaggle competition specifications. It is not a Kaggle leaderboard benchmark."
+}

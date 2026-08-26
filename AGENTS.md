@@ -1,4 +1,4 @@
-# Repository Agent Instructions — AI Data Expert V6.1 Candidate
+# Repository Agent Instructions — AI Data Expert V6.5 Frozen Candidate
 
 Use `.agents/skills/ai-data-expert/SKILL.md` for data analysis, ML/DL, Vision, time-series, Big Data, MLOps, causal analysis, competition-aware planning, and Jupyter notebook tasks.
 
@@ -21,5 +21,12 @@ Rules:
 - If a competition-specific metric requires unavailable hierarchy/weights/artifacts, return APPROX/REVIEW rather than pretending exact reproduction.
 - Runtime `FAIL` cannot be presented as completed; `REVIEW` requires caveats.
 - Execute and semantically validate notebooks before completion when execution is part of the task.
-- V3/V4/V5/V6/V6.1 freeze/evaluation evidence is historical provenance. Do not rewrite old freeze results to improve scores.
-- Current main baseline is V6.1 Candidate, not Production Release.
+- V3/V4/V5/V6/V6.1/V6.2/V6.3/V6.4/V6.5 freeze/evaluation evidence is historical provenance. Do not rewrite old freeze results to improve scores.
+- Current main baseline is V6.5 Frozen Candidate, not Production Release.
+
+Final notebook output:
+- Show `data check -> observation -> reason -> decision -> experiment -> Test interpretation` naturally.
+- Do not expose internal Agent terms such as DataGuard/Argument Ledger/Verifier in student-facing notebooks.
+- Values not specified by the assignment (sequence length, lag, threshold) are experiment assumptions, not facts.
+- Validation selects; final Test reports. If MAE/RMSE/R2 disagree, preserve the tradeoff instead of saying one model won every metric.
+- Scope RNN/LSTM comparisons when parameter counts differ.

@@ -1,0 +1,10 @@
+{
+  "version": "V6.3_FROZEN_CANDIDATE",
+  "status": "HISTORICAL_FREEZE",
+  "holdout_summary": {
+    "structural_holdout_pass": 176,
+    "structural_holdout_total": 200,
+    "rate": 0.88
+  },
+  "note": "Historical freeze preserved. The 88% holdout used a different stress design from V6.4 and must not be compared as if it were the same test."
+}
