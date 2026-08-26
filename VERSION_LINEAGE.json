@@ -1,0 +1,32 @@
+{
+  "current": "V4",
+  "status": "FROZEN_AFTER_TARGETED_SEALED_SIMULATION",
+  "lineage": [
+    "S0 no-agent notebook baseline",
+    "Data Expert V2/V3",
+    "Multi-Expert Supervisor",
+    "Expert Reasoning V1",
+    "Tacit Expert V2",
+    "Codex Skill V1",
+    "Codex Skill V2",
+    "Codex Skill V3",
+    "Codex Skill V4"
+  ],
+  "v4_changes": [
+    "partial-label target semantics",
+    "identifier and row-order proxy guard",
+    "entity/run/time split inference",
+    "hybrid Domain RAG",
+    "structured fact injection",
+    "semantic notebook validation",
+    "Windows UTF-8 and fail-fast setup",
+    "V3 sealed regression fixes"
+  ],
+  "next_version_candidates_not_implemented": [
+    "Argument Ledger",
+    "Shared Evidence Store",
+    "modality-specific semantic verifier",
+    "semantic FAISS runtime benchmark",
+    "cost-aware and uncertainty-aware threshold engine"
+  ]
+}

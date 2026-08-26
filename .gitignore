@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.jupyter-config/
+.jupyter-data/
+.jupyter-runtime/
+.ipython/
+outputs/*.pt
+outputs/*.pth
+outputs/*.ckpt
+outputs/*.log
+.tmp*
