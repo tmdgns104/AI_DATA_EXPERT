@@ -1,6 +1,8 @@
 {
   "current": "V4",
-  "status": "FROZEN_AFTER_TARGETED_SEALED_SIMULATION",
+  "release_state": "V4-clone-ready",
+  "core_status": "FROZEN_AFTER_TARGETED_SEALED_SIMULATION",
+  "distribution_status": "SETUP_AND_RUNTIME_SMOKE_VERIFIED",
   "lineage": [
     "S0 no-agent notebook baseline",
     "Data Expert V2/V3",
@@ -10,7 +12,8 @@
     "Codex Skill V1",
     "Codex Skill V2",
     "Codex Skill V3",
-    "Codex Skill V4"
+    "Codex Skill V4",
+    "V4 clone-ready distribution hardening"
   ],
   "v4_changes": [
     "partial-label target semantics",
@@ -21,6 +24,13 @@
     "semantic notebook validation",
     "Windows UTF-8 and fail-fast setup",
     "V3 sealed regression fixes"
+  ],
+  "clone_ready_hardening": [
+    "complete runtime dependency list",
+    "deterministic demo-data generation during setup",
+    "post-install dependency/runtime/route/verifier smoke test",
+    "repository-local Jupyter/IPython directories for Windows permission isolation",
+    "clear non-zero setup failure propagation"
   ],
   "next_version_candidates_not_implemented": [
     "Argument Ledger",
