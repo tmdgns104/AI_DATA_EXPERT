@@ -1,0 +1,8 @@
+{
+  "version": "TACIT_EXPERT_SYSTEM_V2_FROZEN",
+  "enhanced_system_sha256": "f55c6e546627090394108b229e6d33a67fed55aa863f3fb3fdc30740160323b0",
+  "heuristics_sha256": "d1d7ff8e218bf8109bc212a08535dc9cfb1c30598685a82e75a3b84d71853f3f",
+  "sources_sha256": "0d7a72535fdd48be7d22cbacb749baaad4ad961afef9496c728e3971489a3503",
+  "repair_regression_score_pct": 100.0,
+  "note": "Parent Tacit V2 provenance remains frozen; later versions layer new behavior instead of rewriting this evidence."
+}
